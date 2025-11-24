@@ -30,32 +30,58 @@ class Game:
         
         # Setup rooms
 
-        forest = Room("Forest", "dans une forêt enchantée. Vous entendez une brise légère à travers la cime des arbres.")
-        self.rooms.append(forest)
-        tower = Room("Tower", "dans une immense tour en pierre qui s'élève au dessus des nuages.")
-        self.rooms.append(tower)
-        cave = Room("Cave", "dans une grotte profonde et sombre. Des voix semblent provenir des profondeurs.")
-        self.rooms.append(cave)
-        cottage = Room("Cottage", "dans un petit chalet pittoresque avec un toit de chaume. Une épaisse fumée verte sort de la cheminée.")
-        self.rooms.append(cottage)
-        swamp = Room("Swamp", "dans un marécage sombre et ténébreux. L'eau bouillonne, les abords sont vaseux.")
-        self.rooms.append(swamp)
-        castle = Room("Castle", "dans un énorme château fort avec des douves et un pont levis. Sur les tours, des flèches en or massif.")
-        self.rooms.append(castle)
+        foret = Room("Foret", "dans la forêt interdite. Vous entendez une brise légère qui fait bouger les feuilles des arbres. Cet endroit vous donne la chair de poule, vous n’êtes pas serein.")
+        self.rooms.append(foret)
+        gare = Room("Gare", "A la gare king's Cross.")
+        self.rooms.append(gare)
+        train = Room("train", "désormais dans le train à destination de poudlard, choisissez à côté de qui vous souhaitez faire le trajet.")
+        self.rooms.append(train)
+        entree = Room("Entree", "dans l’entrée de Poudlard.")
+        self.rooms.append(entree)
+        couloir = Room("Couloir", "dans le couloir principal qui mène aux différentes pièces de l'école.")
+        self.rooms.append(couloir)
+        bibliotheque = Room("Bibliotheque", "dans dans la majestueuse et imposante bibliothèque de Poudlard .")
+        self.rooms.append(bibliotheque)
+        classe = Room("Classe", "dans la classe de défense contre les forces du mal du professeur Lupin.")
+        self.rooms.append(classe)
+        banquet = Room("banquet", "dans la grande salle de réception.")
+        self.rooms.append(banquet)
+        dortoirs = Room("Dortoirs", "dans les dortoirs des élèves.")
+        self.rooms.append(dortoirs)
+        cabane = Room("Cabane", "dans la cabane d'Hagrid.")
+        self.rooms.append(cabane)
+        chemin = Room("Chemin", "sur un chemin sombre à l’extérieur de Poudlard.")
+        self.rooms.append(cabane)
+        escalier = Room("Escalier", "dans l’escalier qui relie le couloir au palier de l’étage.")
+        self.rooms.append(escalier)
+        palier = Room("Palier", "sur le palier à l’étage. Il y a deux portes.")
+        self.rooms.append(palier)
+
 
         # Create exits for rooms
 
-        forest.exits = {"N" : cave, "S" : castle, "O" : None}
-        tower.exits = {"N" : cottage, "E" : None, "S" : swamp}
-        cave.exits = {"N" : None, "E" : cottage, "S" : forest, "O" : None}
-        cottage.exits = {"N" : None, "E" : None, "S" : tower, "O" : cave}
-        swamp.exits = {"N" : tower, "E" : None, "S" : None, "O" : castle}
-        castle.exits = {"N" : forest, "E" : swamp, "S" : None, "O" : None}
+        foret.exits = {"N" : chemin}
+        gare.exits = {"E" : train}
+        train.exits = {"E" : entree}
+        entree.exits = {"N" : cabane, "E" : couloir, "S" : chemin}
+        couloir.exits = {"N" : dortoirs, "E" :escalier, "S" : banquet, "O" : entree}
+        escalier.exits = {"U" : palier, "O" : couloir}
+        palier.exits = {"N" : classe, "S" : bibliotheque, "D" : escalier}
+        cabane.exits = {"E" : dortoirs, "S" : couloir}
+        chemin.exits = {"N" : entree, "S" : foret}
+        dortoirs.exits = {"O" : cabane, "S" : couloir}
+        classe.exits = {"S" : palier}
+        bibliotheque.exits = {"N" : palier}
+        banquet.exits = {"N" : couloir}
 
+    
+       
         # Setup player and starting room
 
         self.player = Player(input("\nEntrez votre nom: "))
-        self.player.current_room = swamp
+        self.player.current_room = gare
+        
+        
 
     # Play the game
     def play(self):
@@ -75,9 +101,9 @@ class Game:
 
         command_word = list_of_words[0]
 
-        # If the command is not recognized, print an error message
+        # If the command is not recognized, return nothing 
         if command_word not in self.commands.keys():
-            print(f"\nCommande '{command_word}' non reconnue. Entrez 'help' pour voir la liste des commandes disponibles.\n")
+            return None
         # If the command is recognized, execute it
         else:
             command = self.commands[command_word]
