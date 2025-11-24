@@ -15,6 +15,7 @@ class Game:
         self.rooms = []
         self.commands = {}
         self.player = None
+        self.directions={}
     
     # Setup the game
     def setup(self):
@@ -25,8 +26,8 @@ class Game:
         self.commands["help"] = help
         quit = Command("quit", " : quitter le jeu", Actions.quit, 0)
         self.commands["quit"] = quit
-        go = Command("go", " <direction> : se déplacer dans une direction cardinale (N, E, S, O)", Actions.go, 1)
-        self.commands["go"] = go
+        va = Command("va", " <direction> : se déplacer dans une direction cardinale (N, E, S, O) ou monter (M) ou descendre (D)", Actions.go, 1)
+        self.commands["va"] = va
         
         # Setup rooms
 
@@ -57,6 +58,11 @@ class Game:
         palier = Room("Palier", "sur le palier à l’étage. Il y a deux portes.")
         self.rooms.append(palier)
 
+        # setup directions
+
+        directions = set(['N','NORD','Nord', 'nord', 'S', 'SUD', 'Sud', 'sud', 'E', 'EST', 'Est', 'est',  'O', 'OUEST', 'Ouest', 'ouest', 'M', 'MONTER', 'Monter', 'monter', 'D', 'DESCENDRE', 'Descendre', 'descendre'])
+
+
 
         # Create exits for rooms
 
@@ -65,7 +71,7 @@ class Game:
         train.exits = {"E" : entree}
         entree.exits = {"N" : cabane, "E" : couloir, "S" : chemin}
         couloir.exits = {"N" : dortoirs, "E" :escalier, "S" : banquet, "O" : entree}
-        escalier.exits = {"U" : palier, "O" : couloir}
+        escalier.exits = {"M" : palier, "O" : couloir}
         palier.exits = {"N" : classe, "S" : bibliotheque, "D" : escalier}
         cabane.exits = {"E" : dortoirs, "S" : couloir}
         chemin.exits = {"N" : entree, "S" : foret}

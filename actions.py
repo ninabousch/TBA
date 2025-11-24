@@ -18,7 +18,7 @@ MSG1 = "\nLa commande '{command_word}' prend 1 seul paramètre.\n"
 
 class Actions:
 
-    def go(game, list_of_words, number_of_parameters):
+    def va(game, list_of_words, number_of_parameters):
         """
         Move the player in the direction specified by the parameter.
         The parameter must be a cardinal direction (N, E, S, O).
@@ -55,9 +55,14 @@ class Actions:
 
         # Get the direction from the list of words.
         direction = list_of_words[1]
+        # if the direction is unrecognized, print an error message and return false.
+        if direction not in game.directions:
+            print(f"\nTu ne peux aller par ici jeune sorcier.\n")
+            return False
         # Move the player in the direction specified by the parameter.
-        player.move(direction)
-        return True
+        else:
+            player.move(direction)
+            return True
 
     def quit(game, list_of_words, number_of_parameters):
         """
