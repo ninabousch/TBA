@@ -54,15 +54,16 @@ class Actions:
             return False
 
         # Get the direction from the list of words.
-        direction = list_of_words[1]
+        direction = list_of_words[1][0]
+        direction = direction.upper()
         # if the direction is unrecognized, print an error message and return false.
-        if direction not in game.directions:
-            print(f"\nTu ne peux aller par ici jeune sorcier.\n")
-            return False
-        # Move the player in the direction specified by the parameter.
-        else:
+        if direction in game.directions :
             player.move(direction)
             return True
+        # Move the player in the direction specified by the parameter.
+        else:
+            print("\nTu ne peux pas aller par ici jeune sorcier.\n")
+            return False
 
     def quit(game, list_of_words, number_of_parameters):
         """
