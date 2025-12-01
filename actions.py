@@ -18,7 +18,7 @@ MSG1 = "\nLa commande '{command_word}' prend 1 seul paramètre.\n"
 
 class Actions:
 
-    def va(game, list_of_words, number_of_parameters):
+    def go(game, list_of_words, number_of_parameters):
         """
         Move the player in the direction specified by the parameter.
         The parameter must be a cardinal direction (N, E, S, O).
@@ -142,4 +142,89 @@ class Actions:
         for command in game.commands.values():
             print("\t- " + str(command))
         print()
+        return True
+
+    def history(game, list_of_words, number_of_parameters):
+        """
+        Print the history of rooms visited by the player.
+        
+        Args:
+            game (Game): The game object.
+            list_of_words (list): The list of words in the command.
+            number_of_parameters (int): The number of parameters expected by the command.
+
+        Returns:
+            bool: True if the command was executed successfully, False otherwise.
+
+        Examples:
+
+        >>> from game import Game
+        >>> game = Game()
+        >>> game.setup()
+        >>> history(game, ["history"], 0)
+        True
+        >>> history(game, ["history", "N"], 0)
+        False
+        >>> history(game, ["history", "N", "E"], 0)
+        False
+
+        """
+
+        # If the number of parameters is incorrect, print an error message and return False.
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+        
+        # Print the history of rooms visited by the player.
+        player = game.player
+        print("Historique des pièces visitées :\n")   
+        for room in player.get_history():
+            print(room.name)
+        print("\n")
+        return True
+
+        
+    def back(game, list_of_words, number_of_parameters):
+        """
+        Move the player back to the previous room.
+
+        Args:
+            game (Game): The game object.
+            list_of_words (list): The list of words in the command.
+            number_of_parameters (int): The number of parameters expected by the command.
+
+        Returns:
+            bool: True if the command was executed successfully, False otherwise.
+
+        Examples:
+
+        >>> from game import Game
+        >>> game = Game()
+        >>> game.setup()
+        >>> back(game, ["back"], 0)
+        True
+        >>> back(game, ["back", "N"], 0)
+        False
+        >>> back(game, ["back", "N", "E"], 0)
+        False
+
+        """
+
+        # If the number of parameters is incorrect, print an error message and return False.
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+        
+        player = game.player
+        if not player.history:
+            print("\nAucune pièce précédente dans l'historique !\n")
+            return False
+        
+        previous_room = player.history.pop()
+        player.current_room = previous_room
+        print(player.current_room.get_long_description())
         return True
