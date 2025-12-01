@@ -228,3 +228,48 @@ class Actions:
         player.current_room = previous_room
         print(player.current_room.get_long_description())
         return True
+    
+    def inventory(game, list_of_words, number_of_parameters):
+        """
+        Print the inventory of the player.
+        
+        Args:
+            game (Game): The game object.
+            list_of_words (list): The list of words in the command.
+            number_of_parameters (int): The number of parameters expected by the command.
+
+        Returns:
+            bool: True if the command was executed successfully, False otherwise.
+
+        Examples:
+
+        >>> from game import Game
+        >>> game = Game()
+        >>> game.setup()
+        >>> inventory(game, ["inventory"], 0)
+        True
+        >>> inventory(game, ["inventory", "N"], 0)
+        False
+        >>> inventory(game, ["inventory", "N", "E"], 0)
+        False
+
+        """
+
+        # If the number of parameters is incorrect, print an error message and return False.
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+        
+        # Print the inventory of the player.
+        player = game.player
+        print("Inventaire du joueur :\n")   
+        if player.get_inventory():
+            for item in player.get_inventory().values():
+                print(item)
+        else:
+            print("L'inventaire est vide.\n")
+        print("\n")
+        return True
+    

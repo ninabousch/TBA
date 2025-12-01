@@ -5,7 +5,8 @@ class Player():
     def __init__(self, name):
         self.name = name
         self.current_room = None
-        self.history = []   
+        self.history = []  
+        self.inventory = {}   
     
     # Define the move method.
     def move(self, direction):
@@ -30,4 +31,8 @@ class Player():
         """
         return self.history
     
+    def get_inventory(self):
+        """Return the inventory of the player.
+        """
+        return self.inventory
     
