@@ -6,7 +6,8 @@ class Player():
         self.name = name
         self.current_room = None
         self.history = []  
-        self.inventory = {}   
+        self.inventory = {} 
+        self.max_weight = 10
     
     # Define the move method.
     def move(self, direction):

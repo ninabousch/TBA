@@ -97,30 +97,37 @@ class Game:
 
         #setup items in rooms
         
-        lg = Item("Loups", "Plongez dans les secrets les plus sombres de la magie avec ce guide inédit sur les loups-garous. Découvrez l’histoire tragique de Remus Lupin, les rituels de transformation, et les liens mystérieux entre la lycanthropie et les forces obscures.", "2")
-        bibliotheque.inventory["Loups"] = lg
-        troll = Item("Fiche Magizoologique : Les Trolls", "Découvrez les trolls, ces géants maladroits mais redoutables, de la forêt interdite aux montagnes enneigées. Ce livre explore leurs différentes espèces, leur force colossale et les rares sorciers qui osent les affronter. A voir : types de Trolls, comportements, faiblesses et défenses, conseils de survie, anecdotes et faits marquants.", "2")
-        bibliotheque.inventory["Fiche Magizoologique : Les Trolls" ]= troll
-        acro = Item("Acromentules : Les Géants des Ténèbres", "Découvrez les secrets d’Aragog et de sa colonie, ces araignées géantes aux yeux brillants et au venin redouté. Entre légendes et réalité, ce livre explore leur intelligence, leur territoire et la peur qu’elles inspirent aux sorciers.", "2")
-        bibliotheque.inventory["Acromentules : Les Géants des Ténèbres" ] = acro
-        fantome = Item("Les Voiles de Poudlard : Fantômes et Mémoires Éternelles", "Découvrez les secrets des résidents spectrales de Poudlard : Nick-Quasi-Sans-Tête, le Baron Sanglant, la Dame Grise et bien d’autres. Ce livre lève le voile sur leur existence entre deux mondes, leurs regrets, leurs farces et leur rôle insoupçonné dans l’histoire de l’école.", "2")
-        bibliotheque.inventory["Les Voiles de Poudlard : Fantômes et Mémoires Éternelles" ] = fantome
-        sort = Item("Sortilèges & Incantations : L’Art Invisible de la Magie", "De « Lumos » à « Expecto Patronum », explorez les sortilèges qui façonnent le monde des sorciers. Ce guide révèle l’origine, la puissance et les dangers des formules les plus célèbres — et les moins connues — enseignées à Poudlard.", "2")
-        bibliotheque.inventory["Sortilèges & Incantations : L’Art Invisible de la Magie" ] = sort
-        potion = Item("Potions Magiques : Élixirs, Poisons et Remèdes de Poudlard", "Plongez dans les chaudrons fumants du cours de potions : du Polynectar au Felix Felicis, en passant par les mixtures les plus dangereuses. Ce livre révèle les ingrédients rares, les erreurs à éviter et les secrets de Severus Rogue.", "2")
-        bibliotheque.inventory["Potions Magiques : Élixirs, Poisons et Remèdes de Poudlard" ] = potion
-
+        loups = Item("loups", "Plongez dans les secrets les plus sombres de la magie avec ce guide inédit sur les loups-garous.", "2")
+        bibliotheque.inventory["loups"]= loups
+        trolls = Item("trolls", "Découvrez les trolls leurs histoire, forces et faiblesses ", "2")
+        bibliotheque.inventory["trolls" ]= trolls
+        acro = Item("acromentules", "Découvrez les secrets d’Aragog et de sa colonie", "2")
+        bibliotheque.inventory["acromentules" ] = acro
+        fantomes = Item("fantomes", "Découvrez les secrets des résidents spectrales de Poudlard .", "2")
+        bibliotheque.inventory["fantomes" ] = fantomes
+        sorts = Item("sortileges", "De « Lumos » à « Expecto Patronum », explorez les sortilèges.", "2")
+        bibliotheque.inventory["sortileges" ] = sorts
+        potions = Item("potions", "Plongez dans les chaudrons fumants du cours de potions.", "2")
+        bibliotheque.inventory["potions" ] = potions
 
         
-        echarpe = Item("Echarpe de Gryffondor", "Une écharpe aux couleurs rouge et or, symbole de courage et de bravoure.", "2")
-        dortoirs.inventory["Echarpe de Gryffondor" ] = echarpe
-        chapeau = Item("Chapeau de Sorcier", "Un chapeau pointu noir orné d'une bande argentée, parfait pour compléter votre tenue de sorcier.", "2")
-        dortoirs.inventory["Chapeau de Sorcier" ] = chapeau
-        journal = Item("Journal intime", "Un petit carnet à couverture en cuir qui ne semble pas à sa place ici.", "2")
-        dortoirs.inventory["Journal intime" ]  = journal
+        echarpe = Item("echarpe", "Une écharpe aux couleurs rouge et or, symbole de courage et de bravoure.", "1")
+        dortoirs.inventory["echarpe" ] = echarpe
+        chapeau = Item("chapeau", "Un chapeau pointu noir orné d'une bande argentée, parfait pour compléter votre tenue de sorcier.", "1")
+        dortoirs.inventory["chapeau" ] = chapeau
+        journal = Item("journal", "Un petit carnet à couverture en cuir qui ne semble pas à sa place ici.", "1")
+        dortoirs.inventory["journal" ]  = journal
 
-        valise = Item("Valise", "Une valise en cuir usée, prête pour une aventure magique.", "2")
-        gare.inventory["Valise" ] = valise
+
+        valise = Item("valise", "Une valise en cuir usée, prête pour une aventure magique.", "8")
+        gare.inventory["valise" ] = valise
+        baguette= Item("baguette", "n'oubliez pas votre baguette magique!", "1")
+        gare.inventory["baguette"] = baguette
+
+        papier = Item("papier", "je l'ai vue sortir de la forêt", "1")
+        couloir.inventory["papier"] = papier 
+
+
 
 
 

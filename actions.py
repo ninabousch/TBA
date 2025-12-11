@@ -308,10 +308,13 @@ class Actions:
         room = player.current_room
         item_name = list_of_words[1]
         if item_name in room.get_inventory():
-            item = room.get_inventory().pop(item_name)
-            player.get_inventory()[item_name] = item
-            print(f"\nVous avez pris l'objet : {item_name}\n")
-            return True
+            if sum(float(item.weight) for item in player.get_inventory().values()) + float(room.get_inventory()[item_name].weight) <= player.max_weight:
+                item = room.get_inventory().pop(item_name)
+                player.get_inventory()[item_name] = item
+                print(f"\nVous avez pris l'objet : {item_name}\n")
+            else:
+                print(f"\nVous ne pouvez pas prendre l'objet '{item_name}', il est trop lourd.\n")  
+                return True
         else:
             print(f"\nL'objet '{item_name}' n'est pas dans cette pièce.\n")
             return False    
