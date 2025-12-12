@@ -27,7 +27,7 @@ class Game:
         self.commands["help"] = help
         quit = Command("quit", " : quitter le jeu", Actions.quit, 0)
         self.commands["quit"] = quit
-        go = Command("go", " <direction> : se déplacer dans une direction cardinale (N, E, S, O) ou monter (M) ou descendre (D)", Actions.go, 1)
+        go = Command("go", " <direction> : se déplacer dans une direction cardinale (N, E, S, O) ou monter (U) ou descendre (D)", Actions.go, 1)
         self.commands["go"] = go
         history = Command("history", " : afficher l'historique des pièces visitées", Actions.history, 0)
         self.commands["history"] = history  
@@ -37,12 +37,16 @@ class Game:
         self.commands["inventory"] = inventory
         look = Command("look", " : regarder autour de soi dans la pièce actuelle", Actions.look, 0)
         self.commands["look"] = look
-        take = Command("take", " <item_name> : prendre un objet dans la pièce actuelle", Actions.take, 1)
+        take = Command("take", " : prendre un objet dans la pièce actuelle", Actions.take, 1)
         self.commands["take"] = take
-        drop = Command("drop", " <item_name> : déposer un objet de l'inventaire du joueur dans la pièce actuelle", Actions.drop, 1)
+        drop = Command("drop", " : déposer un objet de l'inventaire du joueur dans la pièce actuelle", Actions.drop, 1)
         self.commands["drop"] = drop
-        check = Command("check", " <item_name> : examiner un objet de l'inventaire du joueur", Actions.check, 0)
+        check = Command("check", " : examiner un objet de l'inventaire du joueur", Actions.check, 0)
         self.commands["check"] = check
+        charger = Command("charger", " : charger une pièce dans le portoloin", Actions.charger, 0)
+        self.commands["charger"] = charger
+        use = Command("use", " : utiliser un objet de l'inventaire du joueur", Actions.use, 1)
+        self.commands["use"] = use
         
         # Setup rooms
 
@@ -75,7 +79,7 @@ class Game:
 
         # setup directions
         # Store allowed direction tokens on the game object so actions can check them
-        self.directions = set(['N', 'NORD', 'Nord', 'nord', 'S', 'SUD', 'Sud', 'sud', 'E', 'EST', 'Est', 'est', 'O', 'OUEST', 'Ouest', 'ouest', 'M', 'MONTER', 'Monter', 'monter', 'D', 'DESCENDRE', 'Descendre', 'descendre'])
+        self.directions = set(['N', 'NORD', 'Nord', 'nord', 'S', 'SUD', 'Sud', 'sud', 'E', 'EST', 'Est', 'est', 'O', 'OUEST', 'Ouest', 'ouest', 'U', 'UP', 'Up', 'up', 'D', 'DOWN', 'Down', 'down'])
 
 
 
@@ -86,7 +90,7 @@ class Game:
         train.exits = {"E" : entree}
         entree.exits = {"N" : cabane, "E" : couloir, "S" : chemin}
         couloir.exits = {"N" : dortoirs, "E" :escalier, "S" : banquet, "O" : entree}
-        escalier.exits = {"M" : palier, "O" : couloir}
+        escalier.exits = {"U" : palier, "O" : couloir}
         palier.exits = {"N" : classe, "S" : bibliotheque, "D" : escalier}
         cabane.exits = {"E" : dortoirs, "S" : couloir}
         chemin.exits = {"N" : entree, "S" : foret}
@@ -97,18 +101,14 @@ class Game:
 
         #setup items in rooms
         
-        loups = Item("loups", "Plongez dans les secrets les plus sombres de la magie avec ce guide inédit sur les loups-garous.", "2")
+        loups = Item("loups", "Plongez dans les secrets les plus sombres de la magie avec ce guide inédit sur les loups-garous.", "1.4")
         bibliotheque.inventory["loups"]= loups
-        trolls = Item("trolls", "Découvrez les trolls leurs histoire, forces et faiblesses ", "2")
+        trolls = Item("trolls", "Découvrez les trolls leurs histoire, forces et faiblesses ", "1.3")
         bibliotheque.inventory["trolls" ]= trolls
-        acro = Item("acromentules", "Découvrez les secrets d’Aragog et de sa colonie", "2")
+        acro = Item("acromentules", "Découvrez les secrets d’Aragog et de sa colonie", "1.5")
         bibliotheque.inventory["acromentules" ] = acro
-        fantomes = Item("fantomes", "Découvrez les secrets des résidents spectrales de Poudlard .", "2")
+        fantomes = Item("fantomes", "Découvrez les secrets des résidents spectrales de Poudlard .", "1.2")
         bibliotheque.inventory["fantomes" ] = fantomes
-        sorts = Item("sortileges", "De « Lumos » à « Expecto Patronum », explorez les sortilèges.", "2")
-        bibliotheque.inventory["sortileges" ] = sorts
-        potions = Item("potions", "Plongez dans les chaudrons fumants du cours de potions.", "2")
-        bibliotheque.inventory["potions" ] = potions
 
         
         echarpe = Item("echarpe", "Une écharpe aux couleurs rouge et or, symbole de courage et de bravoure.", "0.5")
@@ -121,17 +121,17 @@ class Game:
 
         valise = Item("valise", "Une valise en cuir usée, prête pour une aventure magique.", "8")
         gare.inventory["valise" ] = valise
-        baguette= Item("baguette", "n'oubliez pas votre baguette magique!", "0.5")
+        baguette= Item("baguette", "N'oubliez pas votre baguette magique!", "0.5")
         gare.inventory["baguette"] = baguette
 
         papier = Item("papier", "je l'ai vue sortir de la forêt", "0.1")
         couloir.inventory["papier"] = papier 
-        porteloin = Item("porteloin", "Un porteloin ancien, orné de symboles mystérieux.", "0.4")
-        couloir.inventory["porteloin"] = porteloin 
+        portoloin = Item("portoloin", "Un portoloin ancien, orné de symboles mystérieux.", "2.1")
+        couloir.inventory["portoloin"] = portoloin 
 
-        sorts = Item("sortileges", "De « Lumos » à « Expecto Patronum », explorez les sortilèges.", "2")
+        sorts = Item("sortileges", "De « Lumos » à « Expecto Patronum », explorez les sortilèges.", "1.9")
         classe.inventory["sortileges" ] = sorts
-        potions = Item("potions", "Plongez dans les chaudrons fumants du cours de potions.", "2")
+        potions = Item("potions", "Plongez dans les chaudrons fumants du cours de potions.", "1.8")
         classe.inventory["potions" ] = potions
         chaudron = Item("chaudron", "Un chaudron en étain, essentiel pour toute potion bien préparée.", "3")
         classe.inventory["chaudron"] = chaudron
@@ -139,7 +139,7 @@ class Game:
         bonbons = Item("bonbons", "Un assortiment de bonbons magiques pour une pause sucrée.", "0.3")
         train.inventory["bonbons"] = bonbons
         
-        chouette = Item("chouette", "Une chouette blanche aux yeux perçants, prête à livrer votre courrier magique.", "1")
+        chouette = Item("chouette", "Une chouette blanche aux yeux perçants, prête à livrer votre courrier magique.", "1.7")
         entree.inventory["chouette"] = chouette
 
         cookies = Item("cookies", "Un pot de cookies fraîchement cuits, parfaits pour une collation rapide.", "0.5")
@@ -153,7 +153,7 @@ class Game:
         tissu = Item("tissu", "Un morceau de tissu déchiré, peut-être d'un vêtement, un croissant de lune y est brodé.", "0.1")
         chemin.inventory["tissu"] = tissu
 
-        branche = Item("branche", "Une branche de saule cogneur se trouve suspicieusement sur votre chemin.", "0.5")
+        branche = Item("branche", "Une branche de saule cogneur se trouve suspicieusement sur votre chemin.", "0.6")
         foret.inventory["branche"] = branche
 
         

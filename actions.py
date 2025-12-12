@@ -358,6 +358,19 @@ class Actions:
 
 
 
+    def charger(game, list_of_words, number_of_parameters):
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+        save_room = game.player.current_room
+        game.saved_room = save_room
+        print("\nLe portoloin enregistre cette pièce. Vous pourrez y revenir directement lorsque vous le souhaitez.\n")
+        return True
+
+
+
     def use(game, list_of_words, number_of_parameters):
         l = len(list_of_words)
         if l != number_of_parameters + 1:
@@ -367,10 +380,13 @@ class Actions:
         player = game.player
         item_name = list_of_words[1]
         if item_name in player.get_inventory():
-            if item_name == "porteloin":
+            if item_name == "portoloin":
                 print("\nSoudain, une lumière éblouissante vous enveloppe et vous sentez\n"
                       "une force mystérieuse vous transporter à un autre endroit...\n")
                 # Here you could add logic to transport the player to another room.
+                player.current_room = game.saved_room 
+                print("\nVous vous retrouvez dans la pièce enregistrée précédemment avec le portoloin.\n")
+                print(player.current_room.get_long_description())
                 return True
             else:
                 print(f"\nL'objet '{item_name}' ne peut pas être utilisé maintenant.\n")
