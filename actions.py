@@ -312,6 +312,9 @@ class Actions:
                 item = room.get_inventory().pop(item_name)
                 player.get_inventory()[item_name] = item
                 print(f"\nVous avez pris l'objet : {item_name}\n")
+                if item_name == "porteloin":
+                    print("\nEn prenant le porteloin, une sensation étrange vous envahit...\n"
+                          "le bouton en or se met à briller intensément et semble vous appeler.\n")
             else:
                 print(f"\nVous ne pouvez pas prendre l'objet '{item_name}', il est trop lourd.\n")  
                 return True
@@ -352,3 +355,24 @@ class Actions:
         for _,item in player.get_inventory().items():
             print(item.name)
             return True
+
+
+
+    def use(game, list_of_words, number_of_parameters):
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+        player = game.player
+        item_name = list_of_words[1]
+        if item_name in player.get_inventory():
+            if item_name == "porteloin":
+                print("\nSoudain, une lumière éblouissante vous enveloppe et vous sentez\n"
+                      "une force mystérieuse vous transporter à un autre endroit...\n")
+                # Here you could add logic to transport the player to another room.
+                return True
+            else:
+                print(f"\nL'objet '{item_name}' ne peut pas être utilisé maintenant.\n")
+                return False
+       

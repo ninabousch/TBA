@@ -111,21 +111,53 @@ class Game:
         bibliotheque.inventory["potions" ] = potions
 
         
-        echarpe = Item("echarpe", "Une écharpe aux couleurs rouge et or, symbole de courage et de bravoure.", "1")
+        echarpe = Item("echarpe", "Une écharpe aux couleurs rouge et or, symbole de courage et de bravoure.", "0.5")
         dortoirs.inventory["echarpe" ] = echarpe
-        chapeau = Item("chapeau", "Un chapeau pointu noir orné d'une bande argentée, parfait pour compléter votre tenue de sorcier.", "1")
+        chapeau = Item("chapeau", "Un chapeau pointu noir orné d'une bande argentée, parfait pour compléter votre tenue de sorcier.", "0.4")
         dortoirs.inventory["chapeau" ] = chapeau
-        journal = Item("journal", "Un petit carnet à couverture en cuir qui ne semble pas à sa place ici.", "1")
+        journal = Item("journal", "Un petit carnet à couverture en cuir qui ne semble pas à sa place ici.", "0.7")
         dortoirs.inventory["journal" ]  = journal
 
 
         valise = Item("valise", "Une valise en cuir usée, prête pour une aventure magique.", "8")
         gare.inventory["valise" ] = valise
-        baguette= Item("baguette", "n'oubliez pas votre baguette magique!", "1")
+        baguette= Item("baguette", "n'oubliez pas votre baguette magique!", "0.5")
         gare.inventory["baguette"] = baguette
 
-        papier = Item("papier", "je l'ai vue sortir de la forêt", "1")
+        papier = Item("papier", "je l'ai vue sortir de la forêt", "0.1")
         couloir.inventory["papier"] = papier 
+        porteloin = Item("porteloin", "Un porteloin ancien, orné de symboles mystérieux.", "0.4")
+        couloir.inventory["porteloin"] = porteloin 
+
+        sorts = Item("sortileges", "De « Lumos » à « Expecto Patronum », explorez les sortilèges.", "2")
+        classe.inventory["sortileges" ] = sorts
+        potions = Item("potions", "Plongez dans les chaudrons fumants du cours de potions.", "2")
+        classe.inventory["potions" ] = potions
+        chaudron = Item("chaudron", "Un chaudron en étain, essentiel pour toute potion bien préparée.", "3")
+        classe.inventory["chaudron"] = chaudron
+
+        bonbons = Item("bonbons", "Un assortiment de bonbons magiques pour une pause sucrée.", "0.3")
+        train.inventory["bonbons"] = bonbons
+        
+        chouette = Item("chouette", "Une chouette blanche aux yeux perçants, prête à livrer votre courrier magique.", "1")
+        entree.inventory["chouette"] = chouette
+
+        cookies = Item("cookies", "Un pot de cookies fraîchement cuits, parfaits pour une collation rapide.", "0.5")
+        banquet.inventory["cookies"] = cookies
+
+        parchemin = Item("parchemin", "Un plan de la forêt interdite pour vous guider dans cet endroit effrayant.", "0.2")
+        cabane.inventory["parchemin"] = parchemin
+        bottes = Item("bottes", "Une paire de bottes robustes, elles vous sont nécéssaires pour arpenter les chemins escarpés de la foret interdite.", "1")
+        cabane.inventory["bottes"] = bottes
+
+        tissu = Item("tissu", "Un morceau de tissu déchiré, peut-être d'un vêtement, un croissant de lune y est brodé.", "0.1")
+        chemin.inventory["tissu"] = tissu
+
+        branche = Item("branche", "Une branche de saule cogneur se trouve suspicieusement sur votre chemin.", "0.5")
+        foret.inventory["branche"] = branche
+
+        
+
 
 
 
