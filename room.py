@@ -8,6 +8,7 @@ class Room:
         self.description = description
         self.exits = {}
         self.inventory = {}
+        self.characters = {}
     
     # Define the get_exit method.
     def get_exit(self, direction):
@@ -32,6 +33,6 @@ class Room:
         return f"\nVous êtes {self.description}\n\n{self.get_exit_string()}\n"
     
     def get_inventory(self):
-        """Return the inventory of the room.
+        """Return the inventory and non player characters in the room.
         """
         return self.inventory

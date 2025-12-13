@@ -7,6 +7,7 @@ from player import Player
 from command import Command
 from actions import Actions
 from item import Item
+from character import Character
 
 class Game:
 
@@ -125,7 +126,8 @@ class Game:
         gare.inventory["baguette"] = baguette
 
         papier = Item("papier", "je l'ai vue sortir de la forêt", "0.1")
-        couloir.inventory["papier"] = papier 
+        palier.inventory["papier"] = papier 
+        
         portoloin = Item("portoloin", "Un portoloin ancien, orné de symboles mystérieux.", "2.1")
         couloir.inventory["portoloin"] = portoloin 
 
@@ -158,7 +160,48 @@ class Game:
 
         
 
+        # Setup characters in rooms
 
+        Hagrid = Character("Hagrid", "Demi-géant, garde-chasse de Poudlard et ami fidèle des créatures magiques.", cabane, ["Bonjour"])
+        cabane.characters["Hagrid"] = Hagrid
+        
+        Dumbledore = Character("Dumbledore", "Le directeur de Poudlard, connu pour sa grande sagesse et son puissant talent en magie.", banquet, ["Bonjour"])
+        banquet.characters["Dumbledore"] = Dumbledore
+        Mcgonagall = Character("McGonagall", "La professeur de métamorphose stricte mais juste, toujours prête à défendre ses élèves.", banquet, ["Bonjour"])
+        banquet.characters["McGonagall"] = Mcgonagall
+        Pomfresh = Character("Pomfresh", "L'infirmière de Poudlard, soigne les blessures des élèves avec douceur.", banquet, ["Bonjour"])
+        banquet.characters["Pomfresh"] = Pomfresh
+        Choipeau = Character("Choipeau", "Le chapeau magique qui répartit les nouveaux élèves dans les différentes maisons de Poudlard.", banquet, ["Bonjour"])
+        banquet.characters["Choipeau"] = Choipeau
+
+        Dobby = Character("Dobby", "Un elfe de maison loyal et courageux, toujours prêt à aider.", entree, ["Bonjour"])
+        entree.characters["Dobby"] = Dobby
+
+        Lupin = Character("Lupin", "Un professeur de défense contre les forces du mal.", classe, ["Bonjour"])
+        classe.characters["Lupin"] = Lupin
+        Rogue = Character("Rogue", "Le professeur de potions mystérieux et redouté, avec un passé complexe.", classe, ["Bonjour"])
+        classe.characters["Rogue"] = Rogue
+
+        Drago = Character("Drago", "Un élève de Serpentard, connu pour son arrogance et sa rivalité avec les Gryffondors.", dortoirs, ["Bonjour"])
+        dortoirs.characters["Drago"] = Drago
+        Luna = Character("Luna", "Une élève excentrique de Serdaigle, connue pour ses idées originales et sa curiosité sans bornes.", dortoirs, ["Bonjour"])
+        dortoirs.characters["Luna"] = Luna
+
+        Firenze = Character("Firenze", "Un centaure sage et mystérieux, gardien des secrets de la forêt interdite.", foret, ["Bonjour"])
+        foret.characters["Firenze"] = Firenze
+
+        Fantome = Character("Fantome", "Le Baron Sanglant, résident spectral de Poudlard, errant dans les couloirs et racontant des histoires du passé.", escalier, ["Bonjour"])
+        escalier.characters["Fantome"] = Fantome
+
+        Hermione = Character("Hermione", "Une élève brillante et studieuse, toujours prête à aider ses amis avec ses vastes connaissances.", bibliotheque, ["Bonjour"])
+        bibliotheque.characters["Hermione"] = Hermione
+
+        Ron = Character("Ron", "Un élève drôle malgré lui et un peu peureux.", train, ["Bonjour"])
+        train.characters["Ron"] = Ron
+        Harry = Character("Harry", "Le célèbre garçon qui a survécu à l'attaque de Voldemort.", train, ["Bonjour"])
+        train.characters["Harry"] = Harry
+        Cedric = Character("Cedric", "Un élève talentueux et courageux de Poufsouffle.", train, ["Bonjour"])
+        train.characters["Cedric"] = Cedric
 
 
 

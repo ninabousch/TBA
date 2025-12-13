@@ -291,6 +291,8 @@ class Actions:
         if room.get_inventory():
             for item in room.get_inventory().values():
                 print(item)
+            for personnage in player.current_room.characters.values():
+                print(personnage)
         else:       
             print("Il n'y a rien ici.\n")
         print("\n")
