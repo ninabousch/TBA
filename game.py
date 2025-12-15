@@ -189,6 +189,8 @@ class Game:
 
         Firenze = Character("Firenze", "Un centaure sage et mystérieux, gardien des secrets de la forêt interdite.", foret, ["Bonjour"])
         foret.characters["Firenze"] = Firenze
+        detraqueur = Character("Detraqueur", "Une créature sombre et terrifiante, gardien des secrets les plus sombres de la forêt interdite.", foret, ["Bonjour"])
+        foret.characters["Detraqueur"] = detraqueur
 
         Fantome = Character("Fantome", "Le Baron Sanglant, résident spectral de Poudlard, errant dans les couloirs et racontant des histoires du passé.", escalier, ["Bonjour"])
         escalier.characters["Fantome"] = Fantome

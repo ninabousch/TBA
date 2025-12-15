@@ -314,8 +314,8 @@ class Actions:
                 item = room.get_inventory().pop(item_name)
                 player.get_inventory()[item_name] = item
                 print(f"\nVous avez pris l'objet : {item_name}\n")
-                if item_name == "porteloin":
-                    print("\nEn prenant le porteloin, une sensation étrange vous envahit...\n"
+                if item_name == "portoloin":
+                    print("\nEn prenant le portoloin, une sensation étrange vous envahit...\n"
                           "le bouton en or se met à briller intensément et semble vous appeler.\n")
             else:
                 print(f"\nVous ne pouvez pas prendre l'objet '{item_name}', il est trop lourd.\n")  
@@ -393,4 +393,26 @@ class Actions:
             else:
                 print(f"\nL'objet '{item_name}' ne peut pas être utilisé maintenant.\n")
                 return False
-       
+
+
+    def talk(game, list_of_words, number_of_parameters):
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+        
+        player = game.player
+        room = player.current_room
+        character_name = list_of_words[1]
+        if character_name in room.characters:
+            character = room.characters[character_name]
+            print(f"\nVous engagez la conversation avec {character.name}.\n")
+            for phrase in character.dialogues:
+                print(f"{character.name} dit : '{phrase}'\n")
+            return True
+        else:
+            print(f"\nLe personnage '{character_name}' n'est pas dans cette pièce.\n")
+            return False    
+        
+
