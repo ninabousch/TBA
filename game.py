@@ -164,47 +164,47 @@ class Game:
 
         # Setup characters in rooms
 
-        Hagrid = Character("Hagrid", "Demi-géant, garde-chasse de Poudlard et ami fidèle des créatures magiques.", cabane, ["Bonjour"])
+        Hagrid = Character("Hagrid", "Demi-géant, garde-chasse de Poudlard et ami fidèle des créatures magiques.", cabane, ["Bonjour"], False)
         cabane.characters["Hagrid"] = Hagrid
         
-        Dumbledore = Character("Dumbledore", "Le directeur de Poudlard, connu pour sa grande sagesse et son puissant talent en magie.", banquet, ["Bonjour"])
+        Dumbledore = Character("Dumbledore", "Le directeur de Poudlard, connu pour sa grande sagesse et son puissant talent en magie.", banquet, ["Bonjour"], False)
         banquet.characters["Dumbledore"] = Dumbledore
-        Mcgonagall = Character("McGonagall", "La professeur de métamorphose stricte mais juste, toujours prête à défendre ses élèves.", banquet, ["Bonjour"])
+        Mcgonagall = Character("McGonagall", "La professeur de métamorphose stricte mais juste, toujours prête à défendre ses élèves.", banquet, ["Bonjour"],True)
         banquet.characters["McGonagall"] = Mcgonagall
-        Pomfresh = Character("Pomfresh", "L'infirmière de Poudlard, soigne les blessures des élèves avec douceur.", banquet, ["Bonjour"])
+        Pomfresh = Character("Pomfresh", "L'infirmière de Poudlard, soigne les blessures des élèves avec douceur.", banquet, ["Bonjour"], True)
         banquet.characters["Pomfresh"] = Pomfresh
-        Choipeau = Character("Choipeau", "Le chapeau magique qui répartit les nouveaux élèves dans les différentes maisons de Poudlard.", banquet, ["Bonjour"])
+        Choipeau = Character("Choipeau", "Le chapeau magique qui répartit les nouveaux élèves dans les différentes maisons de Poudlard.", banquet, ["Bonjour"], False)
         banquet.characters["Choipeau"] = Choipeau
 
-        Dobby = Character("Dobby", "Un elfe de maison loyal et courageux, toujours prêt à aider.", entree, ["Bonjour", "Dobby est libre!"])
+        Dobby = Character("Dobby", "Un elfe de maison loyal et courageux, toujours prêt à aider.", entree, ["Bonjour", "Dobby est libre!"], True)
         entree.characters["Dobby"] = Dobby
 
-        Lupin = Character("Lupin", "Un professeur de défense contre les forces du mal.", classe, ["Bonjour"])
+        Lupin = Character("Lupin", "Un professeur de défense contre les forces du mal.", classe, ["Bonjour"], False)
         classe.characters["Lupin"] = Lupin
-        Rogue = Character("Rogue", "Le professeur de potions mystérieux et redouté, avec un passé complexe.", classe, ["Bonjour"])
+        Rogue = Character("Rogue", "Le professeur de potions mystérieux et redouté, avec un passé complexe.", classe, ["Bonjour"], False)
         classe.characters["Rogue"] = Rogue
 
-        Drago = Character("Drago", "Un élève de Serpentard, connu pour son arrogance et sa rivalité avec les Gryffondors.", dortoirs, ["Bonjour"])
+        Drago = Character("Drago", "Un élève de Serpentard, connu pour son arrogance et sa rivalité avec les Gryffondors.", dortoirs, ["Bonjour"], True)
         dortoirs.characters["Drago"] = Drago
-        Luna = Character("Luna", "Une élève excentrique de Serdaigle, connue pour ses idées originales et sa curiosité sans bornes.", dortoirs, ["Bonjour"])
+        Luna = Character("Luna", "Une élève excentrique de Serdaigle, connue pour ses idées originales et sa curiosité sans bornes.", dortoirs, ["Bonjour"], False)
         dortoirs.characters["Luna"] = Luna
 
-        Firenze = Character("Firenze", "Un centaure sage et mystérieux, gardien des secrets de la forêt interdite.", foret, ["Bonjour"])
+        Firenze = Character("Firenze", "Un centaure sage et mystérieux, gardien des secrets de la forêt interdite.", foret, ["Bonjour"], False)
         foret.characters["Firenze"] = Firenze
-        detraqueur = Character("Detraqueur", "Une créature sombre et terrifiante, gardien des secrets les plus sombres de la forêt interdite.", foret, ["Bonjour"])
+        detraqueur = Character("Detraqueur", "Une créature sombre et terrifiante, gardien des secrets les plus sombres de la forêt interdite.", foret, ["Bonjour"], True)
         foret.characters["Detraqueur"] = detraqueur
 
-        Fantome = Character("Fantome", "Le Baron Sanglant, résident spectral de Poudlard, errant dans les couloirs et racontant des histoires du passé.", escalier, ["Bonjour"])
+        Fantome = Character("Fantome", "Le Baron Sanglant, résident spectral de Poudlard, errant dans les couloirs et racontant des histoires du passé.", escalier, ["Bonjour"], True)
         escalier.characters["Fantome"] = Fantome
 
-        Hermione = Character("Hermione", "Une élève brillante et studieuse, toujours prête à aider ses amis avec ses vastes connaissances.", bibliotheque, ["Bonjour"])
+        Hermione = Character("Hermione", "Une élève brillante et studieuse, toujours prête à aider ses amis avec ses vastes connaissances.", bibliotheque, ["Bonjour"], True)
         bibliotheque.characters["Hermione"] = Hermione
 
-        Ron = Character("Ron", "Un élève drôle malgré lui et un peu peureux.", train, ["Bonjour"])
+        Ron = Character("Ron", "Un élève drôle malgré lui et un peu peureux.", train, ["Bonjour"], True)
         train.characters["Ron"] = Ron
-        Harry = Character("Harry", "Le célèbre garçon qui a survécu à l'attaque de Voldemort.", train, ["Bonjour"])
+        Harry = Character("Harry", "Le célèbre garçon qui a survécu à l'attaque de Voldemort.", train, ["Bonjour"], True)
         train.characters["Harry"] = Harry
-        Cedric = Character("Cedric", "Un élève talentueux et courageux de Poufsouffle.", train, ["Bonjour"])
+        Cedric = Character("Cedric", "Un élève talentueux et courageux de Poufsouffle.", train, ["Bonjour"], False)
         train.characters["Cedric"] = Cedric
 
 
@@ -227,6 +227,12 @@ class Game:
         while not self.finished:
             # Get the command from the player
             self.process_command(input("> "))
+            # Déplacer les personnages non-joueurs dans chaque salle
+            for room in self.rooms:
+                for character in list(room.characters.values()):
+                    if character.movable_status():
+                        character.move()
+
         return None
 
     # Process the command entered by the player

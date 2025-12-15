@@ -394,6 +394,9 @@ class Actions:
                 print(f"\nL'objet '{item_name}' ne peut pas être utilisé maintenant.\n")
                 return False
 
+           
+
+
 
     def talk(game, list_of_words, number_of_parameters):
         l = len(list_of_words)
