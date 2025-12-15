@@ -407,12 +407,9 @@ class Actions:
         character_name = list_of_words[1]
         if character_name in room.characters:
             character = room.characters[character_name]
-            print(f"\nVous engagez la conversation avec {character.name}.\n")
-            for phrase in character.dialogues:
-                print(f"{character.name} dit : '{phrase}'\n")
+            messages = character.get_msg()
+            print(f"\n{character.name} dit : '{messages}'\n")
             return True
         else:
             print(f"\nLe personnage '{character_name}' n'est pas dans cette pièce.\n")
-            return False    
-        
-
+            return False

@@ -48,6 +48,8 @@ class Game:
         self.commands["charger"] = charger
         use = Command("use", " : utiliser un objet de l'inventaire du joueur", Actions.use, 1)
         self.commands["use"] = use
+        talk = Command("talk", " : parler à un personnage dans la pièce actuelle", Actions.talk, 1)
+        self.commands["talk"] = talk
         
         # Setup rooms
 
@@ -174,7 +176,7 @@ class Game:
         Choipeau = Character("Choipeau", "Le chapeau magique qui répartit les nouveaux élèves dans les différentes maisons de Poudlard.", banquet, ["Bonjour"])
         banquet.characters["Choipeau"] = Choipeau
 
-        Dobby = Character("Dobby", "Un elfe de maison loyal et courageux, toujours prêt à aider.", entree, ["Bonjour"])
+        Dobby = Character("Dobby", "Un elfe de maison loyal et courageux, toujours prêt à aider.", entree, ["Bonjour", "Dobby est libre!"])
         entree.characters["Dobby"] = Dobby
 
         Lupin = Character("Lupin", "Un professeur de défense contre les forces du mal.", classe, ["Bonjour"])
