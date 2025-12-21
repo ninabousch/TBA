@@ -78,3 +78,6 @@ class Room:
         <BLANKLINE>
         """
         return f"\nVous êtes {self.description}\n\n{self.get_exit_string()}\n"
+
+
+### coucou ###
