@@ -65,10 +65,14 @@ class Game:
 
         foret = Room("Foret", "dans la Forêt Interdite, un lieu où même la lumière du jour semble hésiter à entrer. Vous entendez une brise légère transportant des bruits étranges. Cet endroit vous donne la chair de poule.")
         self.rooms.append(foret)
-        gare = Room("Gare", "à la gare king's Cross, entouré par le brouhaha des voyageurs pressés et les sifflements des trains à vapeur. Autour de vous, des familles moldues passent sans rien remarquer, tandis qu’un groupe d’élèves en robe noire rit en poussant des chariots chargés de coffres et de cages à hiboux.")
+        gare = Room("Gare", "à la gare king's Cross, entouré par le brouhaha des voyageurs pressés et les sifflements des trains à vapeur. Autour de vous, des familles moldues passent sans rien remarquer, tandis qu’un groupe d’élèves en robe noire rit en poussant des chariots chargés de coffres et de cages à hiboux.\n Vous devez prendre le train pour Poudlard ! Choisissez le bon : \n N. L'Ombre du Nord \n E. L'Eclair Ecarlate \n S. Le Noisy-Express")
         self.rooms.append(gare)
-        train = Room("train", "désormais dans le train à destination de Poudlard dont les fenêtres offrent une vue sur la campagne anglaise qui défile. Choisissez à côté de qui vous souhaitez faire le trajet.")
+        wrongtrain = Room("WrongTrain", "dans un train sombre et froid. Vous réalisez trop tard qu’il se dirige vers Durmstrang... \n PERDU ! \n Tapez 'quit' pour quitter le jeu.")
+        self.rooms.append(wrongtrain)
+        train = Room("Train", "désormais dans le train à destination de Poudlard dont les fenêtres offrent une vue sur la campagne anglaise qui défile.")
         self.rooms.append(train)
+        noisytrain = Room("NoisyTrain", "dans un wagon bruyant rempli d'élèves turbulents. Vous réalisez trop tard que c'est le RER A qui vous emmène à ESIEE Paris \n PERDU ! \n Tapez 'quit' pour quitter le jeu.")
+        self.rooms.append(noisytrain)
         entree = Room("Entree", "dans l’entrée de Poudlard. Devant vous, les grandes portes s’élèvent, flanquées de gargouilles qui semblent vous observer. Une lueur dorée filtre à travers les vitraux, projetant des ombres mouvantes sur les dalles usées.")
         self.rooms.append(entree)
         couloir = Room("Couloir", "dans le couloir principal qui mène aux différentes pièces de l'école. Les murs de pierre froide sont ornés de portraits animés qui vous observent, murmurant entre eux.")
@@ -77,7 +81,7 @@ class Game:
         self.rooms.append(bibliotheque)
         classe = Room("Classe", "dans la classe de défense contre les forces du mal du professeur Lupin. Une odeur étrange vous enveloppe : un mélange de parchemin ancien et de plantes séchées. Les étagères sont chargées de boîtes étiquetées “dangereux”, de fioles remplies de liquides troubles et de créatures empaillées qui semblent vous suivre du regard.")
         self.rooms.append(classe)
-        banquet = Room("banquet", "dans la grande salle de réception. La Grande Salle est un spectacle à couper le souffle : un plafond ensorcelé reflète un ciel étoilé en mouvement, tandis que les quatre longues tables (Gryffondor, Serpentard, Poufsouffle, Serdaigle) sont garnies de plats fumants. Les bougies flottent au-dessus des têtes, projetant une lumière dorée sur les bannières aux couleurs des maisons.")
+        banquet = Room("Banquet", "dans la grande salle de réception. La Grande Salle est un spectacle à couper le souffle : un plafond ensorcelé reflète un ciel étoilé en mouvement, tandis que les quatre longues tables (Gryffondor, Serpentard, Poufsouffle, Serdaigle) sont garnies de plats fumants. Les bougies flottent au-dessus des têtes, projetant une lumière dorée sur les bannières aux couleurs des maisons.")
         self.rooms.append(banquet)
         dortoirs = Room("Dortoirs", "dans les dortoirs des élèves. Cette grande salle circulaire a des murs de pierre ornés des blasons des quatre maisons. Quatre portes mènent aux dortoirs respectifs.")
         self.rooms.append(dortoirs)
@@ -89,6 +93,8 @@ class Game:
         self.rooms.append(escalier)
         palier = Room("Palier", "sur le palier de l’étage. Le palier circulaire est éclairé par une fenêtre en vitrail représentant un phénix, dont les couleurs changent selon la lumière. Deux portes en chêne massif se font face.")
         self.rooms.append(palier)
+        cachots = Room("Cachots", "dans les cachots sombres et humides de Poudlard. L'air est frais. Ce lieu n'est pas rassurant.")
+        self.rooms.append(cachots)
 
         # setup directions
         # Store allowed direction tokens on the game object so actions can check them
@@ -99,11 +105,12 @@ class Game:
         # Create exits for rooms
 
         foret.exits = {"N" : chemin}
-        gare.exits = {"E" : train}
+        gare.exits = {"N" : wrongtrain, "E" : train, "S" : noisytrain}
         train.exits = {"E" : entree}
         entree.exits = {"N" : cabane, "E" : couloir, "S" : chemin}
         couloir.exits = {"N" : dortoirs, "E" :escalier, "S" : banquet, "O" : entree}
-        escalier.exits = {"U" : palier, "O" : couloir}
+        escalier.exits = {"U" : palier, "D" : cachots, "O" : couloir}
+        cachots.exits = {"U" : escalier}
         palier.exits = {"N" : classe, "S" : bibliotheque, "D" : escalier}
         cabane.exits = {"E" : dortoirs, "S" : couloir}
         chemin.exits = {"N" : entree, "S" : foret}
@@ -130,6 +137,8 @@ class Game:
         dortoirs.inventory["chapeau" ] = chapeau
         journal = Item("journal", "Un petit carnet à couverture en cuir qui ne semble pas à sa place ici.", "0.7")
         dortoirs.inventory["journal" ]  = journal
+        chaussettes = Item("chaussettes", "Une paire de chaussettes colorées et confortables, idéales pour se détendre après une longue journée de cours.", "0.3")
+        dortoirs.inventory["chaussettes" ] = chaussettes
 
 
         valise = Item("valise", "Une valise en cuir usée, prête pour une aventure magique.", "8")
@@ -170,6 +179,9 @@ class Game:
         branche = Item("branche", "Une branche de saule cogneur se trouve suspicieusement sur votre chemin.", "0.6")
         foret.inventory["branche"] = branche
 
+        potion = Item("potion", "Une potion mystérieuse aux couleurs changeantes.", "0.9")
+        cachots.inventory["potion"] = potion
+
         
 
         # Setup characters in rooms
@@ -186,8 +198,8 @@ class Game:
         Choipeau = Character("Choipeau", "Le chapeau magique qui répartit les nouveaux élèves dans les différentes maisons de Poudlard.", banquet, ["Bonjour"], False)
         banquet.characters["Choipeau"] = Choipeau
 
-        Dobby = Character("Dobby", "Un elfe de maison loyal et courageux, toujours prêt à aider.", entree, ["Bonjour", "Dobby est libre!"], True)
-        entree.characters["Dobby"] = Dobby
+        Dobby = Character("Dobby", "Un elfe de maison loyal et courageux, toujours prêt à aider.", cachots, ["Bonjour", "Dobby est libre!"], True)
+        cachots.characters["Dobby"] = Dobby
 
         Lupin = Character("Lupin", "Un professeur de défense contre les forces du mal.", classe, ["Bonjour"], False)
         classe.characters["Lupin"] = Lupin
@@ -231,7 +243,9 @@ class Game:
         self.player.quest_manager = QuestManager(self.player)
         # Setup quests
         self._setup_quests()
-        
+
+
+
     def _setup_quests(self):
         """Initialize all quests."""
         exploration_quest = Quest(
@@ -240,7 +254,7 @@ class Game:
             objectives=["Visiter foret"
                         , "Visiter dortoirs"
                         , "Visiter classe"
-                        , "Visiter Chemin"
+                        , "Visiter chemin"
                         , "Visiter cabane"
                         , "Visiter banquet"
                         , "Visiter bibliotheque"
@@ -248,7 +262,8 @@ class Game:
                         , "Visiter couloir"
                         , "Visiter entree"
                         , "Visiter train"
-                        , "Visiter gare"],
+                        , "Visiter gare"
+                        , "Visiter palier"],
             reward="Titre de Grand Explorateur"
         )
 
