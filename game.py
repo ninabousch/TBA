@@ -8,6 +8,7 @@ from command import Command
 from actions import Actions
 from item import Item
 from character import Character
+from quest import Quest, QuestManager
 
 class Game:
 
@@ -50,6 +51,15 @@ class Game:
         self.commands["use"] = use
         talk = Command("talk", " : parler à un personnage dans la pièce actuelle", Actions.talk, 1)
         self.commands["talk"] = talk
+        quests = Command("quests", " : afficher les quêtes en cours et leurs statuts", Actions.quests, 0)
+        self.commands["quests"] = quests
+        rewards = Command("rewards", " : afficher les récompenses obtenues", Actions.rewards, 0)
+        self.commands["rewards"] = rewards 
+        quest = Command("quest", " <titre de la quête> : afficher les détails d'une quête spécifique", Actions.quest, 1)
+        self.commands["quest"] = quest
+        activate = Command("activate", " : activer une quête", Actions.activate, 1)
+        self.commands["activate"] = activate     
+
         
         # Setup rooms
 
@@ -216,6 +226,56 @@ class Game:
 
         self.player = Player(input("\nEntrez votre nom: "))
         self.player.current_room = gare
+
+        # Initialize quest manager for the player and setup quests
+        self.player.quest_manager = QuestManager(self.player)
+        # Setup quests
+        self._setup_quests()
+        
+    def _setup_quests(self):
+        """Initialize all quests."""
+        exploration_quest = Quest(
+            title="Grand Explorateur",
+            description="Explorez tous les lieux de ce monde mystérieux.",
+            objectives=["Visiter foret"
+                        , "Visiter dortoirs"
+                        , "Visiter classe"
+                        , "Visiter Chemin"
+                        , "Visiter cabane"
+                        , "Visiter banquet"
+                        , "Visiter bibliotheque"
+                        , "Visiter escalier"
+                        , "Visiter couloir"
+                        , "Visiter entree"
+                        , "Visiter train"
+                        , "Visiter gare"],
+            reward="Titre de Grand Explorateur"
+        )
+
+
+        travel_quest = Quest(
+            title="Grand Voyageur",
+            description="Déplacez-vous 30 fois entre les lieux.",
+            objectives=["Se déplacer 30 fois"],
+            reward="Bottes de voyageur"
+        )
+
+
+        discovery_quest = Quest(
+            title="Découvreur de Secrets",
+            description="Découvrez les trois lieux les plus mystérieux.",
+            objectives=["Visiter foret"
+                        , "Visiter dortoirs"
+                        , "Visiter classe"],
+            reward="Clé dorée"
+        )
+
+
+        # Add quests to player's quest manager
+        self.player.quest_manager.add_quest(exploration_quest)
+        self.player.quest_manager.add_quest(travel_quest)
+        self.player.quest_manager.add_quest(discovery_quest)
+
         
         
 
