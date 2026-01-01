@@ -404,8 +404,28 @@ class Actions:
                 print(f"\nL'objet '{item_name}' ne peut pas être utilisé maintenant.\n")
                 return False
 
-           
 
+
+    def read(game, list_of_words, number_of_parameters):
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+        
+        player = game.player
+        item_name = list_of_words[1]
+        if item_name in player.get_inventory():
+            if item_name == "detraqueurs":
+                print("\nLes Détraqueurs sont des créatures sombres et effrayantes qui se nourrissent du bonheur des êtres vivants.\n"
+                      "Ils sont souvent utilisés par les forces du mal pour semer la terreur.\n")
+                return True
+            else:
+                print(f"\nL'objet '{item_name}' ne peut pas être lu.\n")
+                return False
+        else:
+            print(f"\nL'objet '{item_name}' n'est pas dans votre inventaire.\n")
+            return False
 
   
     def talk(game, list_of_words, number_of_parameters):

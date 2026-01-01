@@ -49,6 +49,8 @@ class Game:
         self.commands["charger"] = charger
         use = Command("use", " : utiliser un objet de l'inventaire du joueur", Actions.use, 1)
         self.commands["use"] = use
+        read = Command("read", " : lire un objet de l'inventaire du joueur", Actions.read, 1)
+        self.commands["read"] = read
         talk = Command("talk", " : parler à un personnage dans la pièce actuelle", Actions.talk, 1)
         self.commands["talk"] = talk
         quests = Command("quests", " : afficher les quêtes en cours et leurs statuts", Actions.quests, 0)
