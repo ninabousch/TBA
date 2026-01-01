@@ -92,15 +92,24 @@ class Quest:
         >>> quest.complete_objective("Invalid objective")
         False
         """
-        if objective in self.objectives and objective not in self.completed_objectives:
-            self.completed_objectives.append(objective)
-            print(f"✅ Objectif accompli: {objective}")
+        # Match objectives case-insensitively so small differences in casing
+        # (or apostrophe capitalization) don't prevent completion.
+        matching = None
+        for obj in self.objectives:
+            if obj.lower() == objective.lower():
+                matching = obj
+                break
+
+        if matching and matching not in self.completed_objectives:
+            self.completed_objectives.append(matching)
+            print(f"✅ Objectif accompli: {matching}")
 
             # Check if all objectives are completed
             if len(self.completed_objectives) == len(self.objectives):
                 self.complete_quest(player)
 
             return True
+
         return False
 
 
@@ -271,7 +280,15 @@ class Quest:
             f"Visiter {room_name}",
             f"Explorer {room_name}",
             f"Aller à {room_name}",
-            f"Entrer dans {room_name}"
+            f"Entrer dans {room_name}",
+            f"Aller à l'{room_name}",
+            f"Entrer dans l'{room_name}",
+            f"Aller à la {room_name}",
+            f"Entrer dans la {room_name}",
+            f"Aller dans le bon {room_name}",
+            f"Entrer dans l'{room_name}",
+            f"Aller aux {room_name}",
+            f"Entrer dans le {room_name}"
         ]
 
         for objective in room_objectives:
@@ -308,6 +325,7 @@ class Quest:
             objective_variations = [
                 f"{action} {target}",
                 f"{action} avec {target}",
+                f"{action} le bon {target}",
                 f"{action} le {target}",
                 f"{action} la {target}"
             ]

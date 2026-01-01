@@ -112,7 +112,7 @@ class Game:
         escalier.exits = {"U" : palier, "D" : cachots, "O" : couloir}
         cachots.exits = {"U" : escalier}
         palier.exits = {"N" : classe, "S" : bibliotheque, "D" : escalier}
-        cabane.exits = {"E" : dortoirs, "S" : couloir}
+        cabane.exits = {"E" : dortoirs, "S" : entree}
         chemin.exits = {"N" : entree, "S" : foret}
         dortoirs.exits = {"O" : cabane, "S" : couloir}
         classe.exits = {"S" : palier}
@@ -127,8 +127,11 @@ class Game:
         bibliotheque.inventory["trolls" ]= trolls
         acro = Item("acromentules", "Découvrez les secrets d’Aragog et de sa colonie", "1.5")
         bibliotheque.inventory["acromentules" ] = acro
+        livre = Item("detraqueurs", "Plongez dans l'effrayant univers des Détraqueurs.", "1.6")
+        bibliotheque.inventory["detraqueurs" ] = livre
         fantomes = Item("fantomes", "Découvrez les secrets des résidents spectrales de Poudlard .", "1.2")
         bibliotheque.inventory["fantomes" ] = fantomes
+
 
         
         echarpe = Item("echarpe", "Une écharpe aux couleurs rouge et or, symbole de courage et de bravoure.", "0.5")
@@ -248,6 +251,21 @@ class Game:
 
     def _setup_quests(self):
         """Initialize all quests."""
+
+        train_quest = Quest(
+            title="Petit Voyageur",
+            description="Prenez le bon train pour aller à Poudlard.",
+            objectives=["Aller dans le bon train"],
+            reward="Ticket de train"
+        )
+
+        installation_quest = Quest(
+            title="Installation",
+            description="Installez-vous à Poudlard, allez déposer votre valise dans les dortoirs.",
+            objectives=["take la valise", "Aller à l'entree", "Aller aux dortoirs", "drop la valise"],
+            reward="Uniforme de Poudlard"
+        )
+
         exploration_quest = Quest(
             title="Grand Explorateur",
             description="Explorez tous les lieux de ce monde mystérieux.",
@@ -263,7 +281,8 @@ class Game:
                         , "Visiter entree"
                         , "Visiter train"
                         , "Visiter gare"
-                        , "Visiter palier"],
+                        , "Visiter palier"
+                        , "Visiter cachots"],
             reward="Titre de Grand Explorateur"
         )
 
@@ -280,16 +299,27 @@ class Game:
             title="Découvreur de Secrets",
             description="Découvrez les trois lieux les plus mystérieux.",
             objectives=["Visiter foret"
-                        , "Visiter dortoirs"
-                        , "Visiter classe"],
+                        , "Visiter cachots"
+                        , "Visiter bibliotheque"],
             reward="Clé dorée"
         )
 
 
+        livre_quest = Quest(
+            title="Qui est l'ombre",
+            description="Découvrez quelle est la créature qui rôde dans les couloirs et menace Poudlard. Prenez le livre à son sujet dans la bibliothèque pour en savoir plus.",
+            objectives=["Aller à la bibliotheque", "take le bon livre"],
+            reward="Grimoire magique"
+        )
+
+
         # Add quests to player's quest manager
+        self.player.quest_manager.add_quest(train_quest)
+        self.player.quest_manager.add_quest(installation_quest)
         self.player.quest_manager.add_quest(exploration_quest)
         self.player.quest_manager.add_quest(travel_quest)
         self.player.quest_manager.add_quest(discovery_quest)
+        self.player.quest_manager.add_quest(livre_quest)
 
         
         

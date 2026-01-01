@@ -317,6 +317,10 @@ class Actions:
                 item = room.get_inventory().pop(item_name)
                 player.get_inventory()[item_name] = item
                 print(f"\nVous avez pris l'objet : {item_name}\n")
+                # Notify quest manager about taking items
+                if player.quest_manager:
+                    # Try a common phrasing used in quests
+                    player.quest_manager.complete_objective(f"take la {item_name}")
                 if item_name == "portoloin":
                     print("\nEn prenant le portoloin, une sensation étrange vous envahit...\n"
                           "le bouton en or se met à briller intensément et semble vous appeler.\n")
@@ -342,6 +346,9 @@ class Actions:
             item = player.get_inventory().pop(item_name)
             room.get_inventory()[item_name] = item
             print(f"\nVous avez déposé l'objet : {item_name}\n")
+            # Notify quest manager about dropping items
+            if player.quest_manager:
+                player.quest_manager.complete_objective(f"drop la {item_name}")
             return True
         else:
             print(f"\nL'objet '{item_name}' n'est pas dans votre inventaire.\n")
@@ -415,6 +422,10 @@ class Actions:
             character = room.characters[character_name]
             messages = character.get_msg()
             print(f"\n{character.name} dit : '{messages}'\n")
+            # Notify quest manager about talk-related objectives
+            if player.quest_manager:
+                # Use the verb 'parler' which matches quest phrasing
+                player.quest_manager.check_action_objectives("parler", character_name)
             return True
         else:
             print(f"\nLe personnage '{character_name}' n'est pas dans cette pièce.\n")

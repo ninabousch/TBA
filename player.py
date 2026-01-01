@@ -28,6 +28,18 @@ class Player():
         # Set the current room to the next room.
         self.current_room = next_room
         print(self.current_room.get_long_description())
+        # Update move counter and notify quest manager (if any)
+        try:
+            self.move_count += 1
+        except Exception:
+            self.move_count = 1
+
+        if self.quest_manager:
+            # Update any counter-based objectives
+            self.quest_manager.check_counter_objectives("Se déplacer", self.move_count)
+            # Check room-related objectives for the new room
+            self.quest_manager.check_room_objectives(self.current_room.name)
+
         return True
 
     def get_history(self):
