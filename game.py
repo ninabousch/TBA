@@ -61,8 +61,15 @@ class Game:
         self.commands["quest"] = quest
         activate = Command("activate", " : activer une quête", Actions.activate, 1)
         self.commands["activate"] = activate  
+        activate_all = Command("activate_all", " : activer toutes les quêtes", Actions.activate_all, 0)
+        self.commands["activate_all"] = activate_all
         give = Command("give", " : donner un objet à un personnage dans la pièce actuelle", Actions.give, 2)
         self.commands["give"] = give
+        spell = Command("spell", " : lancer un sort avec un objet de l'inventaire du joueur", Actions.spell, 1)         
+        self.commands["spell"] = spell
+        add = Command("add", " : ajouter un ingrédient dans le chaudron", Actions.add, 3)   
+        self.commands["add"] = add
+        
 
         
         # Setup rooms
@@ -131,8 +138,8 @@ class Game:
         bibliotheque.inventory["trolls" ]= trolls
         acro = Item("acromentules", "Découvrez les secrets d’Aragog et de sa colonie", "1.5")
         bibliotheque.inventory["acromentules" ] = acro
-        livre = Item("detraqueurs", "Plongez dans l'effrayant univers des Détraqueurs.", "1.6")
-        bibliotheque.inventory["detraqueurs" ] = livre
+        detraqueurs = Item("detraqueurs", "Plongez dans l'effrayant univers des Détraqueurs.", "1.6")
+        bibliotheque.inventory["detraqueurs" ] = detraqueurs
         fantomes = Item("fantomes", "Découvrez les secrets des résidents spectrales de Poudlard .", "1.2")
         bibliotheque.inventory["fantomes" ] = fantomes
 
@@ -189,9 +196,8 @@ class Game:
         branche = Item("branche", "Une branche de saule cogneur se trouve suspicieusement sur votre chemin.", "0.6")
         foret.inventory["branche"] = branche
 
-        phénix = Item("larme de phenix", "Une larme de phénix, symbole de renaissance et de puissance magique.", "0.4")
-        cachots.inventory["larme de phenix"] = phénix
-        
+        phenix = Item("phenix", "Une larme de phénix, symbole de renaissance et de puissance magique.", "0.4")
+        cachots.inventory["phenix"] = phenix
 
         # Setup characters in rooms
 
@@ -207,7 +213,7 @@ class Game:
         Choipeau = Character("Choipeau", "Le chapeau magique qui répartit les nouveaux élèves dans les différentes maisons de Poudlard.", banquet, ["Bonjour"], False)
         banquet.characters["Choipeau"] = Choipeau
 
-        Dobby = Character("Dobby", "Un elfe de maison loyal et courageux, toujours prêt à aider.", cachots, ["Bonjour", "Dobby est libre!"], True)
+        Dobby = Character("Dobby", "Un elfe de maison loyal et courageux, toujours prêt à aider.", cachots, ["Bonjour", "Dobby est libre!"], False)
         cachots.characters["Dobby"] = Dobby
 
         Lupin = Character("Lupin", "Un professeur de défense contre les forces du mal.", classe, ["Bonjour"], False)
@@ -268,7 +274,7 @@ class Game:
         installation_quest = Quest(
             title="Installation",
             description="Installez-vous à Poudlard, allez déposer votre valise dans les dortoirs.",
-            objectives=["take la valise", "Aller à l'entree", "Aller aux dortoirs", "drop la valise"],
+            objectives=["take valise", "Aller à l'entree", "Aller aux dortoirs", "drop valise"],
             reward="Uniforme de Poudlard"
         )
 
@@ -286,7 +292,6 @@ class Game:
                         , "Visiter couloir"
                         , "Visiter entree"
                         , "Visiter train"
-                        , "Visiter gare"
                         , "Visiter palier"
                         , "Visiter cachots"],
             reward="Titre de Grand Explorateur"
@@ -314,37 +319,43 @@ class Game:
         livre_quest = Quest(
             title="Qui est l'ombre",
             description="Découvrez quelle est la créature qui rôde dans les couloirs et menace Poudlard. Prenez le livre à son sujet dans la bibliothèque pour en savoir plus.",
-            objectives=["Aller à la bibliotheque", "take le bon livre"],
+            objectives=["Aller à la bibliotheque", "take detraqueurs", "read detraqueurs"],
             reward="Grimoire magique"
         )
+
         talking_quest = Quest(
             title="Maître de la Conversation",
-            description="Parlez à 5 personnages différents dans le jeu.",                   
-            objectives=["Parler à 5 personnages"],
+            description="Parlez à ces 5 personnages différents dans le jeu(Dumbledore, Hagrid, Rogue, Hermione, Firenze).",                   
+            objectives=["talk à Dumbledore", "talk à Hagrid", "talk à Rogue", "talk à Hermione", "talk à Firenze"],
             reward="Amulette de communication"
         )   
         dobby_quest = Quest(
             title="Libérateur d'Elfe",
             description="Aidez Dobby à se libérer de l'esclavage en lui offrant un vêtement.",
-            objectives=["Donner un vêtement à Dobby"],
+            objectives=["give chaussettes à Dobby"],
             reward="Gratitude de Dobby"
         )
 
         learning_quest = Quest(
             title="Apprenti Sorcier",
-            description="Apprenez apprendre le sort expelliarmus avec Lupin en lui parlant 4 fois et en ayant la baguette magique dans l'inventaire.",
-            objectives=["Parler à Lupin 4 fois", "Avoir la baguette magique dans l'inventaire"],
-            reward="Sort Expelliarmus"
+            description="Apprenez le sort expecto patronum avec Lupin en lui parlant 4 fois et en ayant la baguette magique dans l'inventaire.",
+            objectives=["talk Lupin", "talk Lupin", "talk Lupin", "talk Lupin", "take la baguette"],
+            reward="Sort expecto patronum"
         )
 
         potion_quest = Quest(
             title="Apprenti Potioniste",
             description="faire une potion de vérité pour faire parler luna de son secret.", 
-            objectives=["Avoir les ingrédients dans l'inventaire", "Utiliser le chaudron pour faire la potion", "Donner la potion à luna",],
+            objectives=["Add licorne au chaudron","Add phenix au chaudron","Add mandragore au chaudron", "give la potion à luna",],
             reward="Potion de vérité, secret de luna"
         )   
 
-
+        fighting_quest = Quest(
+            title="Combattant Courageux",
+            description="Vaincre le détraqueur dans la forêt interdite grâce aux sort de protection.",
+            objectives=["spell Expecto Patronum"],
+            reward="Cape d'invisibilité"
+        )
 
         saving_quest = Quest(
             title="Sauveur de Poudlard",
@@ -364,6 +375,8 @@ class Game:
         self.player.quest_manager.add_quest(talking_quest)
         self.player.quest_manager.add_quest(dobby_quest)
         self.player.quest_manager.add_quest(saving_quest)
+        self.player.quest_manager.add_quest(learning_quest)
+        self.player.quest_manager.add_quest(potion_quest)       
 
         
         

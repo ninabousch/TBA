@@ -1,3 +1,6 @@
+import random
+
+
 class Character :
 
     def __init__(self, name, description, current_room=None, msgs=None,movable=True):
@@ -23,13 +26,12 @@ class Character :
         return self.msgs.pop(0)  # On retourne et supprime le premier message
     
     def move(self):
-        import random
-
+        """ Move the character to a random adjacent room if movable. """
         # No movement possible without a current room or exits
         if not self.current_room or not self.current_room.exits:
             return False
 
-        # 50% chance de bouger
+        # 33% chance de bouger
         if random.choice([0, 1, 2]) == 0 :
             # Choisir une pièce voisine au hasard
             target = random.choice(list(self.current_room.exits.values()))
@@ -39,8 +41,8 @@ class Character :
             target.characters[self.name] = self
             self.current_room = target
             return True
-        else:   
-            return False
+        
+        return False
         
     def movable_status(self):
         """ Return the movable status of the character. """

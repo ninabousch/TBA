@@ -327,7 +327,22 @@ class Quest:
                 f"{action} avec {target}",
                 f"{action} le bon {target}",
                 f"{action} le {target}",
-                f"{action} la {target}"
+                f"{action} la {target}",
+                f"{action} l'{target}",
+                f"{action} aux {target}",
+                f"{action} des {target}",
+                f"{action} de {target}",
+                f"{action} du {target}",
+                f"{action} de la {target}",
+                f"{action} de l'{target}",
+                f"'{action} de aux {target}",
+                f"{action} chez {target}",
+                f"{action} sur le {target}",
+                f"{action} à {target}",
+                f"{action} {target} à {target}",
+                f"{action} {target} au {target}",
+                f"{action} la {target} contre le {target}",
+                f"{action} le livre sur les {target}"
             ]
         else:
             objective_variations = [action]
@@ -424,6 +439,7 @@ class QuestManager:
         self.quests = []
         self.active_quests = []
         self.player = player
+        self.all_quests = {}
 
 
     def add_quest(self, quest):
