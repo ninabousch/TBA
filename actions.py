@@ -675,4 +675,42 @@ class Actions:
        return True
 
 
+    def give(game, list_of_words, number_of_parameters, character_name):
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+        
+        player = game.player
+        room = player.current_room
+        item_name = list_of_words[1]
+        if item_name in player.get_inventory():
+            item = player.get_inventory().pop(item_name)
+            room.get_inventory()[item_name] = item
+            print(f"\n vous avez donné l'objet : {item_name} à : {character_name}\n")
+            return True
+        else:
+            print(f"\nL'objet '{item_name}' n'est pas dans cette pièce.\n")
+            return False
+            
 
+    def add_in_chaudron(game, list_of_words, number_of_parameters,):
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+        
+        player = game.player
+        room = player.current_room
+        item_name = list_of_words[1]
+        if item_name in player.get_inventory():
+            if "chaudron" in player.get_inventory():
+                item = player.get_inventory().pop(item_name)
+                room.get_inventory()[item_name] = item
+                print(f"\nVous avez ajouté l'ingrédient dans le chaudron : {item_name}\n")
+                return True
+        else:
+            print(f"\nL'objet '{item_name}' n'est pas dans l'inventaire du joueur.\n")
+            return False

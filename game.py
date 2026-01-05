@@ -60,7 +60,9 @@ class Game:
         quest = Command("quest", " <titre de la quête> : afficher les détails d'une quête spécifique", Actions.quest, 1)
         self.commands["quest"] = quest
         activate = Command("activate", " : activer une quête", Actions.activate, 1)
-        self.commands["activate"] = activate     
+        self.commands["activate"] = activate  
+        give = Command("give", " : donner un objet à un personnage dans la pièce actuelle", Actions.give, 2)
+        self.commands["give"] = give
 
         
         # Setup rooms
@@ -159,10 +161,11 @@ class Game:
 
         sorts = Item("sortileges", "De « Lumos » à « Expecto Patronum », explorez les sortilèges.", "1.9")
         classe.inventory["sortileges" ] = sorts
-        potions = Item("potions", "Plongez dans les chaudrons fumants du cours de potions.", "1.8")
-        classe.inventory["potions" ] = potions
         chaudron = Item("chaudron", "Un chaudron en étain, essentiel pour toute potion bien préparée.", "3")
         classe.inventory["chaudron"] = chaudron
+        mandragore = Item("mandragore", "Une mandragore fraîchement récoltée, ses racines sont encore couvertes de terre.", "2.5")
+        classe.inventory["mandragore"] = mandragore
+
 
         bonbons = Item("bonbons", "Un assortiment de bonbons magiques pour une pause sucrée.", "0.3")
         train.inventory["bonbons"] = bonbons
@@ -177,6 +180,8 @@ class Game:
         cabane.inventory["parchemin"] = parchemin
         bottes = Item("bottes", "Une paire de bottes robustes, elles vous sont nécéssaires pour arpenter les chemins escarpés de la foret interdite.", "1")
         cabane.inventory["bottes"] = bottes
+        licorne = Item("licorne", "Un poil de licorne, réputé pour ses propriétés magiques et sa pureté.", "0.3")
+        cabane.inventory["licorne"] = licorne
 
         tissu = Item("tissu", "Un morceau de tissu déchiré, peut-être d'un vêtement, un croissant de lune y est brodé.", "0.1")
         chemin.inventory["tissu"] = tissu
@@ -184,9 +189,8 @@ class Game:
         branche = Item("branche", "Une branche de saule cogneur se trouve suspicieusement sur votre chemin.", "0.6")
         foret.inventory["branche"] = branche
 
-        potion = Item("potion", "Une potion mystérieuse aux couleurs changeantes.", "0.9")
-        cachots.inventory["potion"] = potion
-
+        phénix = Item("larme de phenix", "Une larme de phénix, symbole de renaissance et de puissance magique.", "0.4")
+        cachots.inventory["larme de phenix"] = phénix
         
 
         # Setup characters in rooms
@@ -313,6 +317,41 @@ class Game:
             objectives=["Aller à la bibliotheque", "take le bon livre"],
             reward="Grimoire magique"
         )
+        talking_quest = Quest(
+            title="Maître de la Conversation",
+            description="Parlez à 5 personnages différents dans le jeu.",                   
+            objectives=["Parler à 5 personnages"],
+            reward="Amulette de communication"
+        )   
+        dobby_quest = Quest(
+            title="Libérateur d'Elfe",
+            description="Aidez Dobby à se libérer de l'esclavage en lui offrant un vêtement.",
+            objectives=["Donner un vêtement à Dobby"],
+            reward="Gratitude de Dobby"
+        )
+
+        learning_quest = Quest(
+            title="Apprenti Sorcier",
+            description="Apprenez apprendre le sort expelliarmus avec Lupin en lui parlant 4 fois et en ayant la baguette magique dans l'inventaire.",
+            objectives=["Parler à Lupin 4 fois", "Avoir la baguette magique dans l'inventaire"],
+            reward="Sort Expelliarmus"
+        )
+
+        potion_quest = Quest(
+            title="Apprenti Potioniste",
+            description="faire une potion de vérité pour faire parler luna de son secret.", 
+            objectives=["Avoir les ingrédients dans l'inventaire", "Utiliser le chaudron pour faire la potion", "Donner la potion à luna",],
+            reward="Potion de vérité, secret de luna"
+        )   
+
+
+
+        saving_quest = Quest(
+            title="Sauveur de Poudlard",
+            description="Sauvez Poudlard de la menace qui plane sur elle en accomplissant toutes les autres quêtes.",
+            objectives=["Compléter toutes les autres quêtes"],
+            reward="Héros de Poudlard"
+        )
 
 
         # Add quests to player's quest manager
@@ -322,6 +361,9 @@ class Game:
         self.player.quest_manager.add_quest(travel_quest)
         self.player.quest_manager.add_quest(discovery_quest)
         self.player.quest_manager.add_quest(livre_quest)
+        self.player.quest_manager.add_quest(talking_quest)
+        self.player.quest_manager.add_quest(dobby_quest)
+        self.player.quest_manager.add_quest(saving_quest)
 
         
         
