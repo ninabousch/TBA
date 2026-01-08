@@ -63,7 +63,7 @@ class Game:
         self.commands["activate"] = activate  
         activate_all = Command("activate_all", " : activer toutes les quêtes", Actions.activate_all, 0)
         self.commands["activate_all"] = activate_all
-        give = Command("give", " : donner un objet à un personnage dans la pièce actuelle", Actions.give, 2)
+        give = Command("give", " < objet + personnage > : donner un objet à un personnage dans la pièce actuelle", Actions.give, 2)
         self.commands["give"] = give
         spell = Command("spell", " : lancer un sort avec un objet de l'inventaire du joueur", Actions.spell, 1)         
         self.commands["spell"] = spell
@@ -166,8 +166,8 @@ class Game:
         portoloin = Item("portoloin", "Un portoloin ancien, orné de symboles mystérieux.", "2.1")
         couloir.inventory["portoloin"] = portoloin 
 
-        sorts = Item("sortileges", "De « Lumos » à « Expecto Patronum », explorez les sortilèges.", "1.9")
-        classe.inventory["sortileges" ] = sorts
+        sortileges = Item("sortileges", "De « Lumos » à « Expecto Patronum », explorez les sortilèges.", "1.9")
+        classe.inventory["sortileges" ] = sortileges
         chaudron = Item("chaudron", "Un chaudron en étain, essentiel pour toute potion bien préparée.", "3")
         classe.inventory["chaudron"] = chaudron
         mandragore = Item("mandragore", "Une mandragore fraîchement récoltée, ses racines sont encore couvertes de terre.", "2.5")
@@ -201,47 +201,47 @@ class Game:
 
         # Setup characters in rooms
 
-        Hagrid = Character("Hagrid", "Demi-géant, garde-chasse de Poudlard et ami fidèle des créatures magiques.", cabane, ["Bonjour"], False)
+        Hagrid = Character("Hagrid", "Demi-géant, garde-chasse de Poudlard et ami fidèle des créatures magiques.", cabane, ["Bonjour à toi {player.name}", "Veux-tu voir mon nouvel animal de companie? Il s'appelle Fumier."], False)
         cabane.characters["Hagrid"] = Hagrid
-        
-        Dumbledore = Character("Dumbledore", "Le directeur de Poudlard, connu pour sa grande sagesse et son puissant talent en magie.", banquet, ["Bonjour"], False)
+
+        Dumbledore = Character("Dumbledore", "Le directeur de Poudlard, connu pour sa grande sagesse et son puissant talent en magie.", banquet, ["Bienvenue à Poudlard jeune sorcier.", " Je vous avertis, une créature rôde dans les couloirs et menace la sécurité de l'école. Soyez prudent."], False)
         banquet.characters["Dumbledore"] = Dumbledore
-        Mcgonagall = Character("McGonagall", "La professeur de métamorphose stricte mais juste, toujours prête à défendre ses élèves.", banquet, ["Bonjour"],True)
+        Mcgonagall = Character("McGonagall", "La professeur de métamorphose stricte mais juste, toujours prête à défendre ses élèves.", banquet, ["Retournez immédiatement à vos dortoirs!"],True)
         banquet.characters["McGonagall"] = Mcgonagall
-        Pomfresh = Character("Pomfresh", "L'infirmière de Poudlard, soigne les blessures des élèves avec douceur.", banquet, ["Bonjour"], True)
+        Pomfresh = Character("Pomfresh", "L'infirmière de Poudlard, soigne les blessures des élèves avec douceur.", banquet, ["Comment puis-je t'aider?"], True)
         banquet.characters["Pomfresh"] = Pomfresh
-        Choipeau = Character("Choipeau", "Le chapeau magique qui répartit les nouveaux élèves dans les différentes maisons de Poudlard.", banquet, ["Bonjour"], False)
+        Choipeau = Character("Choipeau", "Le chapeau magique qui répartit les nouveaux élèves dans les différentes maisons de Poudlard.", banquet, ["Griffondor, Poussoufle, Serdaigle ou Serpentard?"], False)
         banquet.characters["Choipeau"] = Choipeau
 
-        Dobby = Character("Dobby", "Un elfe de maison loyal et courageux, toujours prêt à aider.", cachots, ["Bonjour", "Dobby est libre!"], False)
+        Dobby = Character("Dobby", "Un elfe de maison loyal et courageux, toujours prêt à aider.", cachots, ["Aidez Dobby à sortir, Dobby se sent seul", "Dobby est libre!"], False)
         cachots.characters["Dobby"] = Dobby
 
-        Lupin = Character("Lupin", "Un professeur de défense contre les forces du mal.", classe, ["Bonjour"], False)
+        Lupin = Character("Lupin", "Un professeur de défense contre les forces du mal.", classe, ["Que veux-tu apprendre aujourd'hui?"],False)
         classe.characters["Lupin"] = Lupin
-        Rogue = Character("Rogue", "Le professeur de potions mystérieux et redouté, avec un passé complexe.", classe, ["Bonjour"], False)
+        Rogue = Character("Rogue", "Le professeur de potions mystérieux et redouté, avec un passé complexe.", classe, ["Gare à toi, je t'ai à l'oeil"], False)
         classe.characters["Rogue"] = Rogue
 
-        Drago = Character("Drago", "Un élève de Serpentard, connu pour son arrogance et sa rivalité avec les Gryffondors.", dortoirs, ["Bonjour"], True)
+        Drago = Character("Drago", "Un élève de Serpentard, connu pour son arrogance et sa rivalité avec les Gryffondors.", dortoirs, ["va-t'en sale sang de Bourbe"], True)
         dortoirs.characters["Drago"] = Drago
-        Luna = Character("Luna", "Une élève excentrique de Serdaigle, connue pour ses idées originales et sa curiosité sans bornes.", dortoirs, ["Bonjour"], False)
+        Luna = Character("Luna", "Une élève excentrique de Serdaigle, connue pour ses idées originales et sa curiosité sans bornes.", dortoirs, ["La lune sera rose ce soir, veux tu venir l'observer avec moi? ", "j'ai une pensée tout à l'heure mais je ne m'en souviens plus", "j'ai essaye de rendre un détraqueur gentil mais il m'a échappé.", "j'ai honte, aide moi à le retrouver "], False)
         dortoirs.characters["Luna"] = Luna
 
-        Firenze = Character("Firenze", "Un centaure sage et mystérieux, gardien des secrets de la forêt interdite.", foret, ["Bonjour"], False)
+        Firenze = Character("Firenze", "Un centaure sage et mystérieux, gardien des secrets de la forêt interdite.", foret, ["Tu n'as pas le droit d'être ici",  "les détraqueurs rôdent dans la forêt."], False)
         foret.characters["Firenze"] = Firenze
-        detraqueur = Character("Detraqueur", "Une créature sombre et terrifiante, gardien des secrets les plus sombres de la forêt interdite.", foret, ["Bonjour"], False)
+        detraqueur = Character("Detraqueur", "Une créature sombre et terrifiante, gardien des secrets les plus sombres de la forêt interdite.", foret, ["shhhhhaaaaarh"], False)
         foret.characters["Detraqueur"] = detraqueur
 
-        Fantome = Character("Fantome", "Le Baron Sanglant, résident spectral de Poudlard, errant dans les couloirs et racontant des histoires du passé.", escalier, ["Bonjour"], True)
+        Fantome = Character("Fantome", "Le Baron Sanglant, résident spectral de Poudlard, errant dans les couloirs et racontant des histoires du passé.", escalier, ["Ne va surtout pas au cachot."], True)
         escalier.characters["Fantome"] = Fantome
 
-        Hermione = Character("Hermione", "Une élève brillante et studieuse, toujours prête à aider ses amis avec ses vastes connaissances.", bibliotheque, ["Bonjour"], True)
+        Hermione = Character("Hermione", "Une élève brillante et studieuse, toujours prête à aider ses amis avec ses vastes connaissances.", bibliotheque, ["tu devrais être en train de réviser à la bibliothèque au lieu de traîner dans les couloirs."], True)
         bibliotheque.characters["Hermione"] = Hermione
 
-        Ron = Character("Ron", "Un élève drôle malgré lui et un peu peureux.", train, ["Bonjour"], True)
+        Ron = Character("Ron", "Un élève drôle malgré lui et un peu peureux.", train, ["je ne sais pas pourquoi mais j'ai comme un mauvais pressentiment pour cette année"], True)
         train.characters["Ron"] = Ron
-        Harry = Character("Harry", "Le célèbre garçon qui a survécu à l'attaque de Voldemort.", train, ["Bonjour"], True)
+        Harry = Character("Harry", "Le célèbre garçon qui a survécu à l'attaque de Voldemort.", train, ["je suis plus célèbre que toi alors va voir ailleurs"], True)
         train.characters["Harry"] = Harry
-        Cedric = Character("Cedric", "Un élève talentueux et courageux de Poufsouffle.", train, ["Bonjour"], False)
+        Cedric = Character("Cedric", "Un élève talentueux et courageux de Poufsouffle.", train, ["Bonjour, tu peux t'assoir à côté de moi si tu le souhaite.", " Evite Harry, la célébrité lui monte à la tête en ce moment"], False)
         train.characters["Cedric"] = Cedric
 
 
@@ -319,31 +319,23 @@ class Game:
         dobby_quest = Quest(
             title="Libérateur d'Elfe",
             description="Aidez Dobby à se libérer de l'esclavage en lui offrant un vêtement.",
-            objectives=["give chaussettes à Dobby"],
+            objectives=["take chaussettes", "give chaussettes to Dobby"],
             reward="Gratitude de Dobby"
-        )
-
-
-        learning_quest = Quest(
-            title="Apprenti Sorcier",
-            description="Apprenez le sort expecto patronum avec Lupin en lui parlant 4 fois et en ayant la baguette magique dans l'inventaire.",
-            objectives=["talk à Lupin", "talk à Lupin", "talk à Lupin", "talk à Lupin", "take baguette"],
-            reward="Sort expecto patronum"
         )
 
 
         potion_quest = Quest(
             title="Apprenti Potioniste",
             description="faire une potion de vérité pour faire parler luna de son secret.", 
-            objectives=["Add licorne au chaudron","Add phenix au chaudron","Add mandragore au chaudron", "give la potion à Luna",],
-            reward="Potion de vérité, secret de Luna"
+            objectives=["Add licorne to chaudron","Add phenix to chaudron","Add mandragore to chaudron"],
+            reward="Potion de vérité"
         )   
 
 
         fighting_quest = Quest(
             title="Combattant Courageux",
             description="Vaincre le détraqueur dans la forêt interdite grâce aux sort de protection.",
-            objectives=["spell Expecto Patronum"],
+            objectives=["take baguette","aller à la classe", "take sortileges", "read sortileges", " aller à la foret","spell expecto_patronum", "use portoloin"],
             reward="Cape d'invisibilité"
         )
 
@@ -351,7 +343,7 @@ class Game:
         saving_quest = Quest(
             title="Sauveur de Poudlard",
             description="Sauvez Poudlard de la menace qui plane sur elle en accomplissant toutes les autres quêtes.",
-            objectives=["Compléter toutes les autres quêtes"],
+            objectives=["Compléter fighting_quest", "Completer dobby_quest", "Completer livre_quest", "Completer exploration_quest", "Completer train_quest"],
             reward="Héros de Poudlard"
         )
 
@@ -364,7 +356,6 @@ class Game:
         self.player.quest_manager.add_quest(talking_quest)
         self.player.quest_manager.add_quest(dobby_quest)
         self.player.quest_manager.add_quest(saving_quest)
-        self.player.quest_manager.add_quest(learning_quest)
         self.player.quest_manager.add_quest(potion_quest)    
         self.player.quest_manager.add_quest(fighting_quest)   
 

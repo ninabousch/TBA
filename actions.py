@@ -404,9 +404,21 @@ class Actions:
                 print("\nSoudain, une lumière éblouissante vous enveloppe et vous sentez\n"
                       "une force mystérieuse vous transporter à un autre endroit...\n")
                 # Here you could add logic to transport the player to another room.
-                player.current_room = game.saved_room 
+                # Ensure a room was saved with the portoloin before transporting
+                if getattr(game, 'saved_room', None) is None:
+                    print("\nLe portoloin n'a pas de destination enregistrée. Utilisez 'charger' d'abord.\n")
+                    return False
+
+                player.current_room = game.saved_room
                 print("\nVous vous retrouvez dans la pièce enregistrée précédemment avec le portoloin.\n")
                 print(player.current_room.get_long_description())
+                # Notify quest manager about using the portoloin
+                if player.quest_manager:
+                    player.quest_manager.complete_objective("use portoloin")
+                return True
+            # Notify quest manager about using the item 
+            if player.quest_manager:
+                player.quest_manager.complete_objective(f"use {item_name}")
                 return True
             else:
                 print(f"\nL'objet '{item_name}' ne peut pas être utilisé maintenant.\n")
@@ -427,9 +439,24 @@ class Actions:
             if item_name == "detraqueurs":
                 print("\nLes Détraqueurs sont des créatures sombres et effrayantes qui se nourrissent du bonheur des êtres vivants.\n"
                       "Ils sont souvent utilisés par les forces du mal pour semer la terreur.\n")
+            if item_name == "sortileges":  
+                print("En lisant le livre, vous découvrez un sortilège de protection contre les Détraqueurs : 'Expecto Patronum'.\n"
+                          "Vous sentez que vous avez appris quelque chose d'important.\n")
+            if item_name == "loups":
+                print("Le livre raconte l'histoire des loups-garous, des êtres maudits qui se transforment lors des nuits de pleine lune.\n"
+                      "Il explique également comment les reconnaître et les éviter.\n")
+            if item_name == "acro":
+                print("Le livre raconte l'histoire des Acromentules, des arachnides gigantesques et dangereux.\n"
+                      "Il explique également comment les reconnaître et les éviter.\n")
+            if item_name == "trolls ":
+                print("Le livre raconte l'histoire des Trolls, des créatures massives et brutales.\n"
+                      "Il explique également comment les reconnaître et les éviter.\n")
+            if item_name == "fantomes":
+                print("Le livre raconte l'histoire des Fantômes, des esprits errants des anciens habitants de Poudlard.\n"
+                      "Il explique également comment les reconnaître et les éviter.\n")
                     # Notify quest manager about reading the book   
-                if player.quest_manager:
-                    player.quest_manager.complete_objective("read detraqueurs")
+            if player.quest_manager:
+                player.quest_manager.complete_objective(f"read {item_name}")
                 return True
             else:
                 print(f"\nL'objet '{item_name}' ne peut pas être lu.\n")
@@ -665,14 +692,6 @@ class Actions:
          🗡️  Nouvelle quête activée: Grand Explorateur
          📝 Explorez 5 pièces différentes dans le jeu.
          
-         🗡️  Nouvelle quête activée: Grand Voyageur
-         📝 Déplacez-vous 10 fois entre les lieux.
-         
-         🗡️  Nouvelle quête activée: Découvreur de Secrets
-         📝 Trouvez 3 objets cachés dans le jeu.
-         
-         🗡️  Nouvelle quête activée: Apprenti Sorcier
-         📝 Parlez à Lupin 4 fois, Avoir la baguette magique dans l'inventaire.
          
          🗡️  Nouvelle quête activée: Potion Magique
          📝 Récupérez les ingrédients et préparez la potion magique.
@@ -761,12 +780,16 @@ class Actions:
         item_name = list_of_words[1]
         character_name = list_of_words[2]
         if item_name in player.get_inventory():
-            item = player.get_inventory().pop(item_name)
-            room.get_inventory()[item_name] = item
-            print(f"\n vous avez donné l'objet : {item_name} à : {character_name}\n")
-            # Notify quest manager about giving items
-            if player.quest_manager:
-                player.quest_manager.complete_objective(f"give {item_name} to {character_name}")    
+            if character_name not in room.characters:
+                print(f"\nLe personnage '{character_name}' n'est pas dans cette pièce.\n")      
+                return False
+            else:
+                item = player.get_inventory().pop(item_name)
+                room.get_inventory()[item_name] = item
+                print(f"\n vous avez donné l'objet : {item_name} à : {character_name}\n")
+                # Notify quest manager about giving items
+                if player.quest_manager:
+                    player.quest_manager.complete_objective(f"give {item_name} to {character_name}")    
             return True
         else:
             print(f"\nL'objet '{item_name}' n'est pas dans cette pièce.\n")
@@ -805,12 +828,12 @@ class Actions:
         
         player = game.player
         spell_name = list_of_words[1]
-        if spell_name == "expecto patronum":
-            if "la baguette" in player.get_inventory():
+        if spell_name == "expecto_patronum":
+            if "baguette" in player.get_inventory():
                 print("\nVous lancez le sort Expecto Patronum avec succès !\n")
                 # Notify quest manager about casting the spell      
                 if player.quest_manager:
-                    player.quest_manager.complete_objective("spell expecto patronum")
+                    player.quest_manager.complete_objective("spell expecto_patronum")
                 return True
             else:
                 print("\nVous n'avez pas la baguette magique pour lancer ce sort.\n")

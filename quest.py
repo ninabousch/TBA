@@ -102,7 +102,8 @@ class Quest:
 
         if matching and matching not in self.completed_objectives:
             self.completed_objectives.append(matching)
-            print(f"✅ Objectif accompli: {matching}")
+            print(f"✅ Objectif accompli: {matching}\n")
+    
 
             # Check if all objectives are completed
             if len(self.completed_objectives) == len(self.objectives):
