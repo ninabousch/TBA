@@ -63,11 +63,11 @@ class Game:
         self.commands["activate"] = activate  
         activate_all = Command("activate_all", " : activer toutes les quêtes", Actions.activate_all, 0)
         self.commands["activate_all"] = activate_all
-        give = Command("give", " < objet + personnage > : donner un objet à un personnage dans la pièce actuelle", Actions.give, 2)
+        give = Command("give", " < objet + to + personnage > : donner un objet à un personnage dans la pièce actuelle", Actions.give, 3)
         self.commands["give"] = give
         spell = Command("spell", " : lancer un sort avec un objet de l'inventaire du joueur", Actions.spell, 1)         
         self.commands["spell"] = spell
-        add = Command("add", " : ajouter un ingrédient dans le chaudron", Actions.add, 3)   
+        add = Command("add", " < objet + to + objet > : ajouter un ingrédient dans le chaudron", Actions.add, 3)   
         self.commands["add"] = add
         
 
@@ -326,7 +326,7 @@ class Game:
 
         potion_quest = Quest(
             title="Apprenti Potioniste",
-            description="faire une potion de vérité pour faire parler luna de son secret.", 
+            description="faire une potion de vérité pour faire parler Luna de son secret.", 
             objectives=["Add licorne to chaudron","Add phenix to chaudron","Add mandragore to chaudron"],
             reward="Potion de vérité"
         )   
