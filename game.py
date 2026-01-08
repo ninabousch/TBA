@@ -228,7 +228,7 @@ class Game:
 
         Firenze = Character("Firenze", "Un centaure sage et mystérieux, gardien des secrets de la forêt interdite.", foret, ["Bonjour"], False)
         foret.characters["Firenze"] = Firenze
-        detraqueur = Character("Detraqueur", "Une créature sombre et terrifiante, gardien des secrets les plus sombres de la forêt interdite.", foret, ["Bonjour"], True)
+        detraqueur = Character("Detraqueur", "Une créature sombre et terrifiante, gardien des secrets les plus sombres de la forêt interdite.", foret, ["Bonjour"], False)
         foret.characters["Detraqueur"] = detraqueur
 
         Fantome = Character("Fantome", "Le Baron Sanglant, résident spectral de Poudlard, errant dans les couloirs et racontant des histoires du passé.", escalier, ["Bonjour"], True)
@@ -271,12 +271,14 @@ class Game:
             reward="Ticket de train"
         )
 
+
         installation_quest = Quest(
             title="Installation",
             description="Installez-vous à Poudlard, allez déposer votre valise dans les dortoirs.",
             objectives=["take valise", "Aller à l'entree", "Aller aux dortoirs", "drop valise"],
             reward="Uniforme de Poudlard"
         )
+
 
         exploration_quest = Quest(
             title="Grand Explorateur",
@@ -298,24 +300,6 @@ class Game:
         )
 
 
-        travel_quest = Quest(
-            title="Grand Voyageur",
-            description="Déplacez-vous 30 fois entre les lieux.",
-            objectives=["Se déplacer 30 fois"],
-            reward="Bottes de voyageur"
-        )
-
-
-        discovery_quest = Quest(
-            title="Découvreur de Secrets",
-            description="Découvrez les trois lieux les plus mystérieux.",
-            objectives=["Visiter foret"
-                        , "Visiter cachots"
-                        , "Visiter bibliotheque"],
-            reward="Clé dorée"
-        )
-
-
         livre_quest = Quest(
             title="Qui est l'ombre",
             description="Découvrez quelle est la créature qui rôde dans les couloirs et menace Poudlard. Prenez le livre à son sujet dans la bibliothèque pour en savoir plus.",
@@ -323,12 +307,15 @@ class Game:
             reward="Grimoire magique"
         )
 
+
         talking_quest = Quest(
             title="Maître de la Conversation",
-            description="Parlez à ces 5 personnages différents dans le jeu(Dumbledore, Hagrid, Rogue, Hermione, Firenze).",                   
+            description="Parlez à ces 5 personnages différents dans le jeu (Dumbledore, Hagrid, Rogue, Hermione, Firenze).",                   
             objectives=["talk à Dumbledore", "talk à Hagrid", "talk à Rogue", "talk à Hermione", "talk à Firenze"],
             reward="Amulette de communication"
         )   
+
+
         dobby_quest = Quest(
             title="Libérateur d'Elfe",
             description="Aidez Dobby à se libérer de l'esclavage en lui offrant un vêtement.",
@@ -336,19 +323,22 @@ class Game:
             reward="Gratitude de Dobby"
         )
 
+
         learning_quest = Quest(
             title="Apprenti Sorcier",
             description="Apprenez le sort expecto patronum avec Lupin en lui parlant 4 fois et en ayant la baguette magique dans l'inventaire.",
-            objectives=["talk Lupin", "talk Lupin", "talk Lupin", "talk Lupin", "take la baguette"],
+            objectives=["talk à Lupin", "talk à Lupin", "talk à Lupin", "talk à Lupin", "take baguette"],
             reward="Sort expecto patronum"
         )
+
 
         potion_quest = Quest(
             title="Apprenti Potioniste",
             description="faire une potion de vérité pour faire parler luna de son secret.", 
-            objectives=["Add licorne au chaudron","Add phenix au chaudron","Add mandragore au chaudron", "give la potion à luna",],
-            reward="Potion de vérité, secret de luna"
+            objectives=["Add licorne au chaudron","Add phenix au chaudron","Add mandragore au chaudron", "give la potion à Luna",],
+            reward="Potion de vérité, secret de Luna"
         )   
+
 
         fighting_quest = Quest(
             title="Combattant Courageux",
@@ -356,6 +346,7 @@ class Game:
             objectives=["spell Expecto Patronum"],
             reward="Cape d'invisibilité"
         )
+
 
         saving_quest = Quest(
             title="Sauveur de Poudlard",
@@ -369,14 +360,13 @@ class Game:
         self.player.quest_manager.add_quest(train_quest)
         self.player.quest_manager.add_quest(installation_quest)
         self.player.quest_manager.add_quest(exploration_quest)
-        self.player.quest_manager.add_quest(travel_quest)
-        self.player.quest_manager.add_quest(discovery_quest)
         self.player.quest_manager.add_quest(livre_quest)
         self.player.quest_manager.add_quest(talking_quest)
         self.player.quest_manager.add_quest(dobby_quest)
         self.player.quest_manager.add_quest(saving_quest)
         self.player.quest_manager.add_quest(learning_quest)
-        self.player.quest_manager.add_quest(potion_quest)       
+        self.player.quest_manager.add_quest(potion_quest)    
+        self.player.quest_manager.add_quest(fighting_quest)   
 
         
         
@@ -387,13 +377,18 @@ class Game:
         self.print_welcome()
         # Loop until the game is finished
         while not self.finished:
-            # Get the command from the player
-            self.process_command(input("> "))
-            # Déplacer les personnages non-joueurs dans chaque salle
-            for room in self.rooms:
-                for character in list(room.characters.values()):
-                    if character.movable_status():
-                        character.move()
+            # Get the command from the player and process it
+           command_input = input("> ")
+           executed_command = self.process_command(command_input)
+
+
+           # Déplacer les personnages non-joueurs uniquement après la commande 'go'
+           if executed_command == "go":
+               for room in self.rooms:
+                   for character in list(room.characters.values()):
+                       if character.movable_status():
+                           character.move()
+
 
         return None
 
@@ -405,13 +400,14 @@ class Game:
 
         command_word = list_of_words[0]
 
-        # If the command is not recognized, return nothing 
+        # If the command is not recognized, return nothing
         if command_word not in self.commands.keys():
             return None
-        # If the command is recognized, execute it
-        else:
-            command = self.commands[command_word]
-            command.action(self, list_of_words, command.number_of_parameters)
+
+        # If the command is recognized, execute it and return the command word
+        command = self.commands[command_word]
+        command.action(self, list_of_words, command.number_of_parameters)
+        return command_word
 
     # Print the welcome message
     def print_welcome(self):

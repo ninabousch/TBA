@@ -31,8 +31,8 @@ class Character :
         if not self.current_room or not self.current_room.exits:
             return False
 
-        # 33% chance de bouger
-        if random.choice([0, 1, 2]) == 0 :
+        # 50% chance de bouger
+        if random.choice([0, 1]) == 0 :
             # Choisir une pièce voisine au hasard
             target = random.choice(list(self.current_room.exits.values()))
 

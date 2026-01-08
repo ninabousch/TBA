@@ -290,14 +290,22 @@ class Actions:
         player = game.player
         room = player.current_room
         print(room.get_long_description())
-        print("La pièce contient :\n")   
+        print("La pièce contient :\n")
+
+        # Afficher les objets présents dans la pièce (s'il y en a)
         if room.get_inventory():
             for item in room.get_inventory().values():
                 print(item)
+        else:
+            print("Il n'y a pas d'objet ici.\n")
+
+        # Afficher les personnages non-joueurs présents dans la pièce (toujours)
+        if player.current_room.characters:
+            print("\nPersonnages présents dans la pièce :\n")
             for personnage in player.current_room.characters.values():
                 print(personnage)
-        else:       
-            print("Il n'y a rien ici.\n")
+        else:
+            print("Il n'y a aucun personnage ici.\n")
         print("\n")
         return True
     
