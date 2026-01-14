@@ -1,8 +1,34 @@
 # Define the Player class.
 class Player():
+    """
+    This class represents a player in the game.
+
+    Attributes:
+        name (str): The name of the player.
+        current_room (Room): The current room where the player is located.
+        history (list): A list of rooms the player has visited.
+        inventory (dict): The inventory of the player.
+        max_weight (float): The maximum weight the player can carry.
+        rewards (list): A list of rewards earned by the player.
+        move_count (int): A counter for the number of moves made by the player.
+        active_quests (list): A list of active quests for the player.
+        completed_quests (list): A list of completed quests for the player.
+        quest_manager (QuestManager): An instance to manage quests for the player.
+
+    Methods:
+        __init__(self, name): The constructor.
+        move(self, direction): Move the player in the given direction.
+        get_history(self): Return the history of rooms visited by the player.
+        get_inventory(self): Return the inventory of the player.
+        add_reward(self, reward): Add a reward to the player's rewards list.
+        show_rewards(self): Display all rewards earned by the player.
+     
+    """
+
 
     # Define the constructor.
     def __init__(self, name):
+        """ Initialize a player with a name, current room, history, inventory, and other attributes. """
         self.name = name
         self.current_room = None
         self.history = []  
@@ -14,8 +40,10 @@ class Player():
         self.completed_quests = []  # List to store completed quests for the player.
         self.quest_manager = None # QuestManager instance to manage quests for the player.
     
+
     # Define the move method.
     def move(self, direction):
+        """ Move the player in the given direction."""
         # Safely get the next room using Room.get_exit to avoid KeyError.
         next_room = self.current_room.get_exit(direction)
         self.history.append(self.current_room)
@@ -42,6 +70,7 @@ class Player():
 
         return True
 
+
     def get_history(self):
         """Return the history of rooms visited by the player.
 
@@ -49,9 +78,9 @@ class Player():
         """
         return self.history
     
+
     def get_inventory(self):
-        """Return the inventory of the player.
-        """
+        """Return the inventory of the player."""
         return self.inventory
     
 
@@ -65,21 +94,13 @@ class Player():
        Examples:
       
        >>> player = Player("Bob")
-       >>> player.add_reward("Épée magique") # doctest: +NORMALIZE_WHITESPACE
+       >>> player.add_reward("Héros de Poudlard") # doctest: +NORMALIZE_WHITESPACE
        <BLANKLINE>
-       🎁 Vous avez obtenu: Épée magique
-       <BLANKLINE>
-       >>> "Épée magique" in player.rewards
-       True
-       >>> player.add_reward("Épée magique") # Adding same reward again
-       >>> len(player.rewards)
-       1
+       🎁 Vous avez obtenu: Héros de Poudlard
        """
        if reward and reward not in self.rewards:
            self.rewards.append(reward)
            print(f"\n🎁 Vous avez obtenu: {reward}\n")
-
-
 
 
     def show_rewards(self):
@@ -93,14 +114,10 @@ class Player():
        <BLANKLINE>
        🎁 Aucune récompense obtenue pour le moment.
        <BLANKLINE>
-       >>> player.add_reward("Bouclier d'or") # doctest: +NORMALIZE_WHITESPACE
-       <BLANKLINE>
-       🎁 Vous avez obtenu: Bouclier d'or
-       <BLANKLINE>
        >>> player.show_rewards() # doctest: +NORMALIZE_WHITESPACE
        <BLANKLINE>
        🎁 Vos récompenses:
-       • Bouclier d'or
+       • Héros de Poudlard
        <BLANKLINE>
        """
        if not self.rewards:

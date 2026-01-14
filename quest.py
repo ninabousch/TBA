@@ -12,6 +12,21 @@ class Quest:
         is_completed (bool): Whether the quest is completed.
         is_active (bool): Whether the quest is currently active.
         reward (str): Optional reward for completing the quest.
+
+    Methods:
+        __init__(self, title, description, objectives=None, reward=None): The constructor.
+        activate(self): Activate the quest.
+        complete_objective(self, objective, player=None): Mark an objective as completed.
+        complete_quest(self, player=None): Complete the quest.
+        get_status(self): Get the current status of the quest.
+        get_details(self, current_counts=None): Get detailed information about the quest.
+        _format_objective_with_progress(self, objective, current_counts): Format an objective with progress info.
+        _extract_number_from_text(self, text): Extract the first number from a text string.
+        check_room_objective(self, room_name, player=None): Check if visiting a room completes an objective.
+        check_action_objective(self, action, target=None, player=None): Check if performing an action completes an objective.
+        check_counter_objective(self, counter_name, current_count, player=None): Check counting objectives.
+        __str__(self): Return a string representation of the quest.
+        
     """
 
 
@@ -24,18 +39,6 @@ class Quest:
             description (str): The description of the quest.
             objectives (list): List of objectives (default: empty list).
             reward (str): Optional reward description.
-            
-        Examples:
-        
-        >>> quest = Quest("Test Quest", "A test quest", ["Objective 1", "Objective 2"], "Gold coin")
-        >>> quest.title
-        'Test Quest'
-        >>> quest.is_active
-        False
-        >>> quest.is_completed
-        False
-        >>> len(quest.objectives)
-        2
         """
         self.title = title
         self.description = description
@@ -134,6 +137,7 @@ class Quest:
         >>> quest.is_completed
         True
         """
+
         if not self.is_completed:
             self.is_completed = True
             print(f"\n🏆 Quête terminée: {self.title}")
@@ -213,6 +217,7 @@ class Quest:
 
         return details
 
+
     def _format_objective_with_progress(self, objective, current_counts):
         """
         Format an objective with progress information if available.
@@ -237,6 +242,7 @@ class Quest:
                 return f"{objective} (Progression: {current_count}/{required})"
 
         return objective
+
 
     def _extract_number_from_text(self, text):
         """

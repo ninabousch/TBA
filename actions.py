@@ -19,6 +19,9 @@ MSG1 = "\nLa commande '{command_word}' prend 1 seul paramètre.\n"
 MSG3 = "\nLa commande '{command_word}' prend 3 paramètres.\n"
 
 class Actions:
+    """ This class contains the methods that implement the actions of the game. """
+
+
     @staticmethod
     def go(game, list_of_words, number_of_parameters):
         """
