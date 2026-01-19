@@ -24,6 +24,15 @@ title: l'ombre de Poudlard
 classDiagram
     room -- player
     command -- actions
+    game -- command
+    game -- actions
+    game -- item
+    game -- character
+    game -- quest
+    game -- quest_manager
+    character -- room
+    player -- quest_manager
+
     class actions{
         +go() 
         +quit()
