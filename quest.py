@@ -425,6 +425,20 @@ class QuestManager:
         quests (list): List of all quests in the game.
         active_quests (list): List of currently active quests.
         player: Reference to the player object.
+
+    Methods:
+        __init__(self, player=None): The constructor.
+        add_quest(self, quest): Add a quest to the game.    
+        activate_quest(self, quest_title): Activate a quest by its title.
+        complete_objective(self, objective_text): Complete an objective in any active quest.
+        check_room_objectives(self, room_name): Check all active quests for room-related objectives.
+        check_action_objectives(self, action, target=None): Check all active quests for action-related objectives.
+        check_counter_objectives(self, counter_name, current_count): Check all active quests for counter-related objectives.
+        get_active_quests(self): Get all active quests.
+        get_all_quests(self): Get all quests.
+        get_quest_by_title(self, title): Get a quest by its title.
+        show_quests(self): Display all quests and their status.
+        show_quest_details(self, quest_title, current_counts=None): Show detailed information about a specific quest.
     """
 
 
