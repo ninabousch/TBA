@@ -11,9 +11,38 @@ from character import Character
 from quest import Quest, QuestManager
 
 class Game:
+    """
+    Class representing the game.
+    
+    This class manages the entire game environment, including rooms, commands,
+    the player, and game state. It handles the main game loop and coordinates
+    interactions between different game components.
+    
+    Attributes:
+        finished (bool): Flag indicating whether the game has ended.
+        rooms (list): List of all Room objects in the game.
+        commands (dict): Dictionary mapping command names to Command objects.
+        player (Player): The player object controlling the game.
+        directions (set): Set of valid direction tokens (N, S, E, O, U, D, etc.).
+    
+    Methods:  
+        __init__(self) : The constructor.
+        setup(self) : Initializes all game elements (rooms, items, characters, commands, player, quests).
+        play(self) : Main game loop that processes player commands until the game ends.
+        print_welcome(self) : Displays the welcome message and starting room description.
+        process_command(self, command_string) : Parses and executes a player command.   
+        _setup_quests(self) : Initializes all quests available in the game.
+
+    """
+
 
     # Constructor
     def __init__(self):
+        """
+        Initialize a new Game object.
+        
+        Sets up the initial game state with empty collections and no player.
+        """
         self.finished = False
         self.rooms = []
         self.commands = {}
@@ -22,6 +51,17 @@ class Game:
     
     # Setup the game
     def setup(self):
+        """
+        Initialize and configure all game elements.
+        
+        This method sets up:
+        - All available commands with their descriptions and actions
+        - All rooms with their descriptions and connections
+        - All items distributed across rooms
+        - All characters positioned in specific rooms
+        - The player object and starting position
+        - All quests for the player
+        """
 
         # Setup commands
 
@@ -160,7 +200,7 @@ class Game:
         baguette= Item("baguette", "N'oubliez pas votre baguette magique!", "0.5")
         gare.inventory["baguette"] = baguette
 
-        papier = Item("papier", "je l'ai vue sortir de la forêt", "0.1")
+        papier = Item("papier", "vous trouvez un papier par terre prenez le et lisez le", "0.1")
         palier.inventory["papier"] = papier 
         
         portoloin = Item("portoloin", "Un portoloin ancien, orné de symboles mystérieux.", "2.1")
@@ -210,8 +250,8 @@ class Game:
         banquet.characters["McGonagall"] = Mcgonagall
         Pomfresh = Character("Pomfresh", "L'infirmière de Poudlard, soigne les blessures des élèves avec douceur.", banquet, ["Comment puis-je t'aider?"], True)
         banquet.characters["Pomfresh"] = Pomfresh
-        Choipeau = Character("Choipeau", "Le chapeau magique qui répartit les nouveaux élèves dans les différentes maisons de Poudlard.", banquet, ["Griffondor, Poussoufle, Serdaigle ou Serpentard?"], False)
-        banquet.characters["Choipeau"] = Choipeau
+        Choixpeau = Character("Choixpeau", "Le chapeau magique qui répartit les nouveaux élèves dans les différentes maisons de Poudlard.", banquet, ["Griffondor, Poussoufle, Serdaigle ou Serpentard?"], False)
+        banquet.characters["Choixpeau"] = Choixpeau
 
         Dobby = Character("Dobby", "Un elfe de maison loyal et courageux, toujours prêt à aider.", cachots, ["Aidez Dobby à sortir, Dobby se sent seul", "Dobby est libre!"], False)
         cachots.characters["Dobby"] = Dobby
@@ -228,8 +268,8 @@ class Game:
 
         Firenze = Character("Firenze", "Un centaure sage et mystérieux, gardien des secrets de la forêt interdite.", foret, ["Tu n'as pas le droit d'être ici",  "les détraqueurs rôdent dans la forêt."], False)
         foret.characters["Firenze"] = Firenze
-        detraqueur = Character("Detraqueur", "Une créature sombre et terrifiante, gardien des secrets les plus sombres de la forêt interdite.", foret, ["shhhhhaaaaarh"], False)
-        foret.characters["Detraqueur"] = detraqueur
+        Detraqueur = Character("Detraqueur", "Une créature sombre et terrifiante, gardien des secrets les plus sombres de la forêt interdite.", foret, ["shhhhhaaaaarh"], False)
+        foret.characters["Detraqueur"] = Detraqueur
 
         Fantome = Character("Fantome", "Le Baron Sanglant, résident spectral de Poudlard, errant dans les couloirs et racontant des histoires du passé.", escalier, ["Ne va surtout pas au cachot."], True)
         escalier.characters["Fantome"] = Fantome
@@ -262,7 +302,22 @@ class Game:
 
 
     def _setup_quests(self):
-        """Initialize all quests."""
+        """
+        Initialize all quests available in the game.
+        
+        Creates a series of interconnected quests with varying objectives:
+        - train_quest: Tutorial quest to reach Poudlard
+        - installation_quest: Basic quest to get settled
+        - exploration_quest: Visit all locations
+        - livre_quest: Discover information about creatures
+        - talking_quest: Interact with key characters
+        - dobby_quest: Help free an enslaved elf
+        - potion_quest: Craft a special potion
+        - fighting_quest: Defeat a dangerous creature
+        - saving_quest: Complete all other quests to save Poudlard
+        
+        All quests are added to the player's quest manager.
+        """
 
         train_quest = Quest(
             title="Petit Voyageur",
@@ -364,6 +419,18 @@ class Game:
 
     # Play the game
     def play(self):
+        """
+        Main game loop.
+        
+        Orchestrates the entire game flow:
+        1. Sets up all game elements
+        2. Displays the welcome message
+        3. Continuously processes player commands until the game ends
+        4. Moves non-player characters after movement commands
+        
+        Returns:
+            None: Game ends when self.finished becomes True.
+        """
         self.setup()
         self.print_welcome()
         # Loop until the game is finished
@@ -385,9 +452,25 @@ class Game:
 
     # Process the command entered by the player
     def process_command(self, command_string) -> None:
+        """
+        Parse and execute a command entered by the player.
+        
+        Args:
+            command_string (str): The raw command input from the player.
+        
+        Returns:
+            str or None: The command word if successfully executed, None otherwise.
+        
+        Process:
+        1. Splits the command string by spaces
+        2. Extracts the first word as the command name
+        3. Validates the command exists in the commands dictionary
+        4. Executes the command with its associated action
+        5. Returns the command name for tracking purposes
+        """
 
         # Split the command string into a list of words
-        list_of_words = command_string.split(" ")
+        list_of_words = command_string.split()
 
         command_word = list_of_words[0]
 
@@ -402,8 +485,16 @@ class Game:
 
     # Print the welcome message
     def print_welcome(self):
+        """
+        Display the welcome message and initial game information.
+        
+        Shows:
+        - A personalized greeting with the player's name
+        - A help hint
+        - The full description of the starting room
+        """
         print(f"\nBienvenue {self.player.name} dans ce jeu d'aventure !")
-        print("Entrez 'help' si vous avez besoin d'aide.")
+        print("Entrez 'help' si vous avez besoin d'aide.et pour voir toutes les commandes disponibles")
         #
         print(self.player.current_room.get_long_description())
     

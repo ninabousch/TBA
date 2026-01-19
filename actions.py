@@ -19,7 +19,7 @@ MSG1 = "\nLa commande '{command_word}' prend 1 seul paramètre.\n"
 MSG3 = "\nLa commande '{command_word}' prend 3 paramètres.\n"
 
 class Actions:
-    """ This class contains the methods that implement the actions of the game. """
+    """ This class contains the methods that implement the actions of the game."""
 
 
     @staticmethod
@@ -47,6 +47,8 @@ class Actions:
         False
         >>> go(game, ["go"], 1)
         False
+
+        
 
         """
         
@@ -674,7 +676,7 @@ class Actions:
             if item_name == "loups":
                 print("Le livre raconte l'histoire des loups-garous, des êtres maudits qui se transforment lors des nuits de pleine lune.\n"
                       "Il explique également comment les reconnaître et les éviter.\n")
-            if item_name == "acro":
+            if item_name == "acromentules":
                 print("Le livre raconte l'histoire des Acromentules, des arachnides gigantesques et dangereux.\n"
                       "Il explique également comment les reconnaître et les éviter.\n")
             if item_name == "trolls ":
@@ -683,7 +685,10 @@ class Actions:
             if item_name == "fantomes":
                 print("Le livre raconte l'histoire des Fantômes, des esprits errants des anciens habitants de Poudlard.\n"
                       "Il explique également comment les reconnaître et les éviter.\n")
-            
+            if item_name == "papier":
+                print("En lisant le papier, vous découvrez un message mystérieux :\n"
+                      "'Le chemin vers la vérité est caché dans l'ombre.\n")   
+
             # Notify quest manager about reading the book   
             if player.quest_manager:
                 player.quest_manager.complete_objective(f"read {item_name}")
