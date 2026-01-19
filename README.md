@@ -1,6 +1,6 @@
 # TBA
 
-Ce repo contient la dernière version du jeu d’aventure TBA l'ombre de Poudlard.
+Ce repo contient la dernière version du jeu d'aventure TBA l'ombre de Poudlard.
 
 Les lieux sont au nombre de 16. les objets au
 
@@ -17,20 +17,22 @@ Il y a pour le moment 5 modules contenant chacun une classe.
 
 ## Diagramme 
 
-
-
-
-
-
-
-
+```mermaid
 ---
 title: l'ombre de Poudlard
 ---
-
 classDiagram
     room -- player
     command -- actions
+    game -- command
+    game -- actions
+    game -- item
+    game -- character
+    game -- quest
+    game -- quest_manager
+    character -- room
+    player -- quest_manager
+
     class actions{
         +go() 
         +quit()
@@ -164,3 +166,4 @@ classDiagram
         +get_inventory(self): Get the inventory of items available in this room.
     
     }
+```
