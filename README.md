@@ -89,6 +89,8 @@ classDiagram
         +setup(self) : Initializes all game elements (rooms, items, characters, +commands, player, quests).
         +play(self) : Main game loop that processes player commands until the game ends.
         +print_welcome(self) : Displays the welcome message and starting room description.
+        +check_win_conditions(self): Check if the player has met the conditions to win the game.
+        +check_lose_conditions(self):Check if the player has met the conditions to lose the game.
         +process_command(self, command_string) : Parses and executes a player command.   
         +_setup_quests(self) : Initializes all quests available in the game.
     }

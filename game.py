@@ -32,6 +32,8 @@ class Game:
         print_welcome(self) : Displays the welcome message and starting room description.
         process_command(self, command_string) : Parses and executes a player command.   
         _setup_quests(self) : Initializes all quests available in the game.
+        def check_win_conditions(self) : Checks if the player has met the conditions to win the game.
+        def check_lose_conditions(self) : Checks if the player has met the conditions to lose the game.
 
     """
 
