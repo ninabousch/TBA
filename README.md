@@ -113,6 +113,7 @@ classDiagram
         __init__(self, name): The constructor.
         +move(self, direction): Move the player in the given direction.
         +get_history(self): Return the history of rooms visited by the player.
+        +show_history(self):Display the history of rooms visited by the player.
         +get_inventory(self): Return the inventory of the player.
         +add_reward(self, reward): Add a reward to the player's rewards list.
         +show_rewards(self): Display all rewards earned by the player.

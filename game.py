@@ -118,12 +118,12 @@ class Game:
         self.rooms.append(foret)
         gare = Room("Gare", "à la gare king's Cross, entouré par le brouhaha des voyageurs pressés et les sifflements des trains à vapeur. Autour de vous, des familles moldues passent sans rien remarquer, tandis qu’un groupe d’élèves en robe noire rit en poussant des chariots chargés de coffres et de cages à hiboux.\n Vous devez prendre le train pour Poudlard ! Choisissez le bon : \n N. L'Ombre du Nord \n E. L'Eclair Ecarlate \n S. Le Noisy-Express")
         self.rooms.append(gare)
-        wrongtrain = Room("WrongTrain", "dans un train sombre et froid. Vous réalisez trop tard qu’il se dirige vers Durmstrang... \n PERDU ! \n Tapez 'quit' pour quitter le jeu.")
-        self.rooms.append(wrongtrain)
+        lombredunord = Room("LOmbreDuNord", "dans un train sombre et froid. Vous réalisez trop tard qu’il se dirige vers Durmstrang.")
+        self.rooms.append(lombredunord)
         train = Room("Train", "désormais dans le train à destination de Poudlard dont les fenêtres offrent une vue sur la campagne anglaise qui défile.")
         self.rooms.append(train)
-        noisytrain = Room("NoisyTrain", "dans un wagon bruyant rempli d'élèves turbulents. Vous réalisez trop tard que c'est le RER A qui vous emmène à ESIEE Paris \n PERDU ! \n Tapez 'quit' pour quitter le jeu.")
-        self.rooms.append(noisytrain)
+        noisyexpress = Room("NoisyExpress", "dans un wagon bruyant rempli d'élèves turbulents. Vous réalisez trop tard que c'est le RER A qui vous emmène à ESIEE Paris.")
+        self.rooms.append(noisyexpress)
         entree = Room("Entree", "dans l’entrée de Poudlard. Devant vous, les grandes portes s’élèvent, flanquées de gargouilles qui semblent vous observer. Une lueur dorée filtre à travers les vitraux, projetant des ombres mouvantes sur les dalles usées.")
         self.rooms.append(entree)
         couloir = Room("Couloir", "dans le couloir principal qui mène aux différentes pièces de l'école. Les murs de pierre froide sont ornés de portraits animés qui vous observent, murmurant entre eux.")
@@ -156,7 +156,7 @@ class Game:
         # Create exits for rooms
 
         foret.exits = {"N" : chemin}
-        gare.exits = {"N" : wrongtrain, "E" : train, "S" : noisytrain}
+        gare.exits = {"N" : lombredunord, "E" : train, "S" : noisyexpress}
         train.exits = {"E" : entree}
         entree.exits = {"N" : cabane, "E" : couloir, "S" : chemin}
         couloir.exits = {"N" : dortoirs, "E" :escalier, "S" : banquet, "O" : entree}
@@ -293,6 +293,7 @@ class Game:
 
         self.player = Player(input("\nEntrez votre nom: "))
         self.player.current_room = gare
+        self.player.history = [gare]
 
         # Initialize quest manager for the player and setup quests
         self.player.quest_manager = QuestManager(self.player)
@@ -390,7 +391,7 @@ class Game:
         fighting_quest = Quest(
             title="Combattant Courageux",
             description="Vaincre le détraqueur dans la forêt interdite grâce aux sort de protection.",
-            objectives=["take baguette","aller à la classe", "take sortileges", "read sortileges", " aller à la foret","spell expecto_patronum", "use portoloin"],
+            objectives=["take baguette","aller à la classe", "take sortileges", "read sortileges", "aller à la foret","spell expecto_patronum", "use portoloin"],
             reward="Cape d'invisibilité"
         )
 
@@ -398,7 +399,7 @@ class Game:
         saving_quest = Quest(
             title="Sauveur de Poudlard",
             description="Sauvez Poudlard de la menace qui plane sur elle en accomplissant toutes les autres quêtes.",
-            objectives=["Compléter fighting_quest", "Completer dobby_quest", "Completer livre_quest", "Completer exploration_quest", "Completer train_quest"],
+            objectives=["Compléter Combattant Courageux", "Compléter Libérateur d'Elfe", "Compléter Qui est l'ombre", "Compléter Grand Explorateur", "Compléter Petit Voyageur"],
             reward="Héros de Poudlard"
         )
 
@@ -414,6 +415,8 @@ class Game:
         self.player.quest_manager.add_quest(potion_quest)    
         self.player.quest_manager.add_quest(fighting_quest)   
 
+        # Activate the main quest
+        self.player.quest_manager.activate_quest("Sauveur de Poudlard")
         
         
 
@@ -439,6 +442,11 @@ class Game:
            command_input = input("> ")
            executed_command = self.process_command(command_input)
 
+           # Check for win conditions after each command
+           self.check_win_conditions()
+
+           # Check for lose conditions after each command
+           self.check_lose_conditions()
 
            # Déplacer les personnages non-joueurs uniquement après la commande 'go'
            if executed_command == "go":
@@ -449,6 +457,37 @@ class Game:
 
 
         return None
+
+
+    # Define winning conditions 
+    def check_win_conditions(self):
+        """
+        Check if the player has met the conditions to win the game.
+        
+        The game is won when the main quest "Sauveur de Poudlard" is completed.
+        """
+        if not self.finished:
+            saving_quest = self.player.quest_manager.get_quest_by_title("Sauveur de Poudlard")
+            if saving_quest and saving_quest.is_completed:
+                print("\n 🏆 Félicitations ! Vous avez sauvé Poudlard et remporté le jeu ! 🏆")
+                print("Vous êtes désormais le Héros de Poudlard.🎖️🎖️🎖️")
+                self.finished = True
+
+
+    # Define loosing conditions
+    def check_lose_conditions(self):
+        """
+        Check if the player has met the conditions to lose the game.
+        
+        The game is lost when the player enters a losing room.
+        """
+        if not self.finished:
+            # Example losing condition: entering a specific room
+            if self.player.current_room.name == "LOmbreDuNord" or self.player.current_room.name == "NoisyExpress":
+                print("\n💀 Vous avez perdu le jeu ! 💀")
+                print("Mieux vaut réessayer et faire les bons choix cette fois-ci.\n")
+                self.finished = True
+        
 
     # Process the command entered by the player
     def process_command(self, command_string) -> None:

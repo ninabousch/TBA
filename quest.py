@@ -147,6 +147,10 @@ class Quest:
                     player.add_reward(self.reward)
             print()
 
+            # Check for quest completion dependencies
+            if player and hasattr(player, 'quest_manager'):
+                player.quest_manager.check_quest_completion_dependencies(self.title)
+
 
     def get_status(self):
         """
@@ -548,7 +552,7 @@ class QuestManager:
         False
         """
         for quest in self.active_quests:
-            if quest.complete_objective(objective_text):
+            if quest.complete_objective(objective_text, self.player):
                 # Remove completed quests from active list
                 if quest.is_completed:
                     self.active_quests.remove(quest)
@@ -792,3 +796,15 @@ class QuestManager:
             print(quest.get_details(current_counts))
         else:
             print(f"\nQuête '{quest_title}' non trouvée.\n")
+
+    def check_quest_completion_dependencies(self, completed_quest_title):
+        """
+        Check if completing a quest triggers objectives in other quests.
+        
+        Args:
+            completed_quest_title (str): The title of the quest that was just completed.
+        """
+        objective_text = f"Compléter {completed_quest_title}"
+        for quest in self.active_quests[:]: # Use slice to avoid modification during iteration
+            if not quest.is_completed:
+                quest.complete_objective(objective_text, self.player)

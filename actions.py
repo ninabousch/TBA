@@ -66,6 +66,9 @@ class Actions:
         # if the direction is unrecognized, print an error message and return false.
         if direction in game.directions :
             player.move(direction)
+            game.check_lose_conditions()
+            game.player.show_history()
+            
             return True
         # Move the player in the direction specified by the parameter.
         else:

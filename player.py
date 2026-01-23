@@ -46,7 +46,6 @@ class Player():
         """ Move the player in the given direction."""
         # Safely get the next room using Room.get_exit to avoid KeyError.
         next_room = self.current_room.get_exit(direction)
-        self.history.append(self.current_room)
 
         # If the next room is None, print an error message and return False.
         if next_room is None:
@@ -55,6 +54,7 @@ class Player():
 
         # Set the current room to the next room.
         self.current_room = next_room
+        self.history.append(next_room)
         print(self.current_room.get_long_description())
         # Update move counter and notify quest manager (if any)
         try:
@@ -78,6 +78,12 @@ class Player():
         """
         return self.history
     
+    def show_history(self):
+        """Display the history of rooms visited by the player."""
+        print("Historique des pièces visitées :\n")   
+        for room in self.history:
+            print(room.name)
+        print("\n")
 
     def get_inventory(self):
         """Return the inventory of the player."""
