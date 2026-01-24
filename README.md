@@ -1,10 +1,10 @@
-####**Le guide utilisateur :**####
+#### **Le guide utilisateur :**
 
   
 
   
 
-##**Comment installer votre jeu :**##
+## **Comment installer votre jeu :**
 
 Il faut écrire dans le terminal : 
 
@@ -17,11 +17,11 @@ lire les instructions.
 
   
 
-##**Sa description :**##
+## **Sa description :**
 
   
 
-#L’univers, le scénario :#
+# L’univers, le scénario :
 
   
 
@@ -33,7 +33,7 @@ Pour cela, explorez votre environnement dans les moindre détails et résolvez l
 
   
 
-#Salles avec leurs objets et PNJ :#
+# Salles avec leurs objets et PNJ :
 
 Certains PNJ bougent, d’autres non. Ceux qui bougent ont l’indication “bouge” et sont placés dans la salle où ils se trouvent lors de l’initialisation de jeu.
 
@@ -155,7 +155,7 @@ Certains PNJ bougent, d’autres non. Ceux qui bougent ont l’indication “bou
 
   
 
-#Les conditions de victoires/défaites :#
+# Les conditions de victoires/défaites :
 
   
 
@@ -177,7 +177,7 @@ Le joueur perd s’il se trompe de train lorsqu’il est dans la gare. Il y a 3 
 
   
 
-#Les commandes disponibles :#
+# Les commandes disponibles :
 
   
 
@@ -205,7 +205,7 @@ Le joueur perd s’il se trompe de train lorsqu’il est dans la gare. Il y a 3 
 - add < objet + to + objet > : ajouter un ingrédient dans le chaudron                          
 
 
-#Les quêtes :# 
+# Les quêtes :
   
 
 **Nom de la quête** : train\_quest
