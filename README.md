@@ -441,7 +441,7 @@ classDiagram
     }
 ```
 
-####**Les perspectives de développement :**#### 
+#**Les perspectives de développement :**
 
   
 
