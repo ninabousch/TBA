@@ -65,9 +65,9 @@ class Actions:
         direction = direction.upper()
         # if the direction is unrecognized, print an error message and return false.
         if direction in game.directions :
-            player.move(direction)
             game.check_lose_conditions()
             game.player.show_history()
+            player.move(direction)
             
             return True
         # Move the player in the direction specified by the parameter.
@@ -236,11 +236,12 @@ class Actions:
         
         # Move the player back to the previous room.
         player = game.player                                                            # Get the player object
-        if not player.history:                                                          # Check if history is empty
+        if len(player.history) <= 1:                                                    # Check if there's a previous room (need at least 2 rooms in history)
             print("\nIl n'y a aucune pièce précédente dans l'historique !\n")           # Print error message
             return False                                                                # Return False to indicate failure
         
-        previous_room = player.history.pop()                                            # Get the last room from history
+        player.history.pop()                                                            # Remove the current room from history
+        previous_room = player.history[-1]                                              # Get the room before current
         player.current_room = previous_room                                             # Set current room to previous room
         print(player.current_room.get_long_description())                               # Print the description of the current room
         return True                                                                     # Return True to indicate success
