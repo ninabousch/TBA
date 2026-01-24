@@ -28,6 +28,7 @@ class Player():
     """
 
 
+
     # Define the constructor.
     def __init__(self, name):
         """ Initialize a player with a name, current room, history, inventory, and other attributes. """
@@ -42,6 +43,7 @@ class Player():
         self.completed_quests = []  # List to store completed quests for the player.
         self.quest_manager = None # QuestManager instance to manage quests for the player.
     
+
 
     # Define the move method.
     def move(self, direction):
@@ -73,6 +75,7 @@ class Player():
         return True
 
 
+
     def get_history(self):
         """Return the history of rooms visited by the player.
 
@@ -80,6 +83,8 @@ class Player():
         """
         return self.history
     
+
+
     def show_history(self):
         """Display the history of rooms visited by the player."""
         print("Historique des pièces visitées :\n")   
@@ -87,10 +92,13 @@ class Player():
             print(room.name)
         print("\n")
 
+
+
     def get_inventory(self):
         """Return the inventory of the player."""
         return self.inventory
     
+
 
     def add_reward(self, reward):
        """
@@ -109,6 +117,7 @@ class Player():
        if reward and reward not in self.rewards:
            self.rewards.append(reward)
            print(f"\n🎁 Vous avez obtenu: {reward}\n")
+
 
 
     def show_rewards(self):

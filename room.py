@@ -25,6 +25,8 @@ class Room:
         characters (dict): Dictionary mapping character names to Character objects in this room.
     """
 
+
+
     # Define the constructor.
     def __init__(self, name, description):
         """
@@ -43,6 +45,8 @@ class Room:
         self.inventory = {}
         self.characters = {}
     
+
+
     # Define the get_exit method.
     def get_exit(self, direction):
         """
@@ -62,6 +66,8 @@ class Room:
         else:
             return None
     
+
+
     # Return a string describing the room's exits.
     def get_exit_string(self):
         """
@@ -78,6 +84,8 @@ class Room:
         exit_string = exit_string.strip(", ")
         return exit_string
 
+
+
     # Return a long description of this room including exits.
     def get_long_description(self):
         """
@@ -91,6 +99,8 @@ class Room:
                  - Additional newlines for formatting
         """
         return f"\nVous êtes {self.description}\n\n{self.get_exit_string()}\n"
+    
+
     
     def get_inventory(self):
         """

@@ -49,6 +49,7 @@ class Quest:
         self.reward = reward
 
 
+
     def activate(self):
         """
         Activate the quest.
@@ -69,6 +70,7 @@ class Quest:
         self.is_active = True
         print(f"\n🗡️  Nouvelle quête activée: {self.title}")
         print(f"📝 {self.description}\n")
+
 
 
     def complete_objective(self, objective, player=None):
@@ -117,6 +119,7 @@ class Quest:
         return False
 
 
+
     def complete_quest(self, player=None):
         """
         Mark the quest as completed and give reward to player.
@@ -152,6 +155,7 @@ class Quest:
                 player.quest_manager.check_quest_completion_dependencies(self.title)
 
 
+
     def get_status(self):
         """
         Get the current status of the quest.
@@ -184,6 +188,7 @@ class Quest:
         completed_count = len(self.completed_objectives)
         total_count = len(self.objectives)
         return f"⏳ {self.title} ({completed_count}/{total_count} objectifs)"
+
 
 
     def get_details(self, current_counts=None):
@@ -222,6 +227,7 @@ class Quest:
         return details
 
 
+
     def _format_objective_with_progress(self, objective, current_counts):
         """
         Format an objective with progress information if available.
@@ -248,6 +254,7 @@ class Quest:
         return objective
 
 
+
     def _extract_number_from_text(self, text):
         """
         Extract the first number from a text string.
@@ -262,6 +269,7 @@ class Quest:
             if word.isdigit():
                 return int(word)
         return None
+
 
 
     def check_room_objective(self, room_name, player=None):
@@ -306,6 +314,7 @@ class Quest:
             if self.complete_objective(objective, player):
                 return True
         return False
+
 
 
     def check_action_objective(self, action, target=None, player=None):
@@ -364,6 +373,7 @@ class Quest:
         return False
 
 
+
     def check_counter_objective(self, counter_name, current_count, player=None):
         """
         Check objectives that require counting (e.g., visit X rooms, collect Y items).
@@ -401,6 +411,7 @@ class Quest:
         return False
 
 
+
     def __str__(self):
         """
         Return a string representation of the quest.
@@ -419,6 +430,7 @@ class Quest:
         '⏳ String Test (0/1 objectifs)'
         """
         return self.get_status()
+
 
 
 class QuestManager:
@@ -446,6 +458,7 @@ class QuestManager:
     """
 
 
+
     def __init__(self, player=None):
         """
         Initialize the quest manager.
@@ -467,6 +480,7 @@ class QuestManager:
         self.all_quests = {}
 
 
+
     def add_quest(self, quest):
         """
         Add a quest to the game.
@@ -485,6 +499,7 @@ class QuestManager:
         'Quest 1'
         """
         self.quests.append(quest)
+
 
 
     def activate_quest(self, quest_title):
@@ -519,6 +534,7 @@ class QuestManager:
                 self.active_quests.append(quest)
                 return True
         return False
+
 
 
     def complete_objective(self, objective_text):
@@ -560,6 +576,7 @@ class QuestManager:
         return False
 
 
+
     def check_room_objectives(self, room_name):
         """
         Check all active quests for room-related objectives.
@@ -590,6 +607,7 @@ class QuestManager:
             quest.check_room_objective(room_name, self.player)
             if quest.is_completed:
                 self.active_quests.remove(quest)
+
 
 
     def check_action_objectives(self, action, target=None):
@@ -623,6 +641,7 @@ class QuestManager:
             quest.check_action_objective(action, target, self.player)
             if quest.is_completed:
                 self.active_quests.remove(quest)
+
 
 
     def check_counter_objectives(self, counter_name, current_count):
@@ -661,6 +680,7 @@ class QuestManager:
                 self.active_quests.remove(quest)
 
 
+
     def get_active_quests(self):
         """
         Get all active quests.
@@ -687,6 +707,7 @@ class QuestManager:
         return self.active_quests
 
 
+
     def get_all_quests(self):
         """
         Get all quests.
@@ -705,6 +726,7 @@ class QuestManager:
         2
         """
         return self.quests
+
 
 
     def get_quest_by_title(self, title):
@@ -736,6 +758,7 @@ class QuestManager:
         return None
 
 
+
     def show_quests(self):
         """
         Display all quests and their status.
@@ -763,6 +786,7 @@ class QuestManager:
         for quest in self.quests:
             print(f"  {quest.get_status()}")
         print()
+
 
 
     def show_quest_details(self, quest_title, current_counts=None):
@@ -796,6 +820,8 @@ class QuestManager:
             print(quest.get_details(current_counts))
         else:
             print(f"\nQuête '{quest_title}' non trouvée.\n")
+
+
 
     def check_quest_completion_dependencies(self, completed_quest_title):
         """

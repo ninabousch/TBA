@@ -14,11 +14,14 @@ class Item :
     """
 
 
+
     def __init__(self, name, description, weight):
         """ Initialize an item with name, description, and weight. """
         self.name = name
         self.description = description
         self.weight = weight
+
+
 
     def __str__(self) :
         """ Return the string representation of the item. """
