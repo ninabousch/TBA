@@ -1,10 +1,10 @@
-####**Le guide utilisateur :** 
+####**Le guide utilisateur :**####
 
   
 
   
 
-##**Comment installer votre jeu :** 
+##**Comment installer votre jeu :**##
 
 Il faut écrire dans le terminal : 
 
@@ -17,11 +17,11 @@ lire les instructions.
 
   
 
-##**Sa description :** 
+##**Sa description :**##
 
   
 
-#L’univers, le scénario : 
+#L’univers, le scénario :#
 
   
 
@@ -33,7 +33,7 @@ Pour cela, explorez votre environnement dans les moindre détails et résolvez l
 
   
 
-#Salles avec leurs objets et PNJ : 
+#Salles avec leurs objets et PNJ :#
 
 Certains PNJ bougent, d’autres non. Ceux qui bougent ont l’indication “bouge” et sont placés dans la salle où ils se trouvent lors de l’initialisation de jeu.
 
@@ -76,178 +76,136 @@ Certains PNJ bougent, d’autres non. Ceux qui bougent ont l’indication “bou
 
   
 
-La salle de classe (classe)
+**La salle de classe (classe)**
 
-Un livre sur les sortilèges (sortilèges)
-
-Un chaudron (chaudron)
-
-Une mandragore (mandragore)
-
-Le professeur Lupin (Lupin)
-
-Le professeur Rogue (Rogue)
+- Un livre sur les sortilèges (sortilèges)
+- Un chaudron (chaudron)
+- Une mandragore (mandragore)
+- Le professeur Lupin (Lupin)
+- Le professeur Rogue (Rogue)
 
   
 
-La grande salle (banquet)
+**La grande salle (banquet)**
 
-Des cookies (cookies)
-
-Le directeur Dumbledore (Dumbledore)
-
-La professeur Mcgonagall (Mcgonagall) bouge
-
-L’infirmière Pomfresh (Pomfresh) bouge
-
-Le Choixpeau Magique (Choixpeau)
+- Des cookies (cookies)
+- Le directeur Dumbledore (Dumbledore)
+- La professeur Mcgonagall (Mcgonagall) bouge
+- L’infirmière Pomfresh (Pomfresh) bouge
+- Le Choixpeau Magique (Choixpeau)
 
   
 
-La cabane d’Hagrid (cabane)
+**La cabane d’Hagrid (cabane)**
 
-Un parchemin (parchemin)
-
-Une paire de bottes (bottes)
-
-Un poil de licorne (licorne)
-
-Le demi-géant Hagrid (Hagrid)
+- Un parchemin (parchemin)
+- Une paire de bottes (bottes)
+- Un poil de licorne (licorne)
+- Le demi-géant Hagrid (Hagrid)
 
   
 
-Le chemin (chemin)
+**Le chemin (chemin)**
 
-Un bout de tissu (tissu)
-
-  
-
-Les dortoirs (dortoirs)
-
-Une écharpe de Gryffondor (echarpe)
-
-Un chapeau de sorcier (chapeau)
-
-Un journal intime (journal)
-
-Une paire de chaussettes (chaussettes)
-
-L’élève Drago ( Drago) bouge
-
-L’élève Luna (Luna)
+- Un bout de tissu (tissu)
 
   
 
-La forêt interdite (foret)                                                            
+**Les dortoirs (dortoirs)**
 
-Une branche (branche)
-
-Le centaure Firenze (Firenze)
-
-Le détraqueur (Détraqueur)
-
-  
-
-Les cachots (cachots)
-
-Une larmes de phénix (phenix)
-
-L’elfe Dobby (Dobby)
+- Une écharpe de Gryffondor (echarpe)
+- Un chapeau de sorcier (chapeau)
+- Un journal intime (journal)
+- Une paire de chaussettes (chaussettes)
+- L’élève Drago ( Drago) bouge
+- L’élève Luna (Luna)
 
   
 
-Les escaliers (escalier)
+**La forêt interdite (foret)**                                                            
 
-Le Baron Sanglant (Fantome) bouge
-
-  
-
-Le palier (palier)
-
-Un bout de papier (papier)
+- Une branche (branche)
+- Le centaure Firenze (Firenze)
+- Le détraqueur (Détraqueur)
 
   
 
-Le couloir (couloir)
+**Les cachots (cachots)**
 
-Un portoloin (portoloin)
-
-  
-
-Les conditions de victoires/défaites : 
+- Une larmes de phénix (phenix)
+- L’elfe Dobby (Dobby)
 
   
 
-Victoires : 
+**Les escaliers (escalier)**
+
+- Le Baron Sanglant (Fantome) bouge
+
+  
+
+**Le palier (palier)**
+
+- Un bout de papier (papier)
+
+  
+
+**Le couloir (couloir)**
+
+- Un portoloin (portoloin)
+
+  
+
+#Les conditions de victoires/défaites :#
+
+  
+
+**Victoires :**
 
 Pour gagner le jeu, le joueur doit effectuer 1 quêtes obligatoirement, qui demande de faire les 5 quêtes suivantes : 
 
-Petit Voyageur
-
-Grand Explorateur
-
-Qui est l’ombre
-
-Libérateur d’Elfe
-
-Combattant Courageux
+- Petit Voyageur
+- Grand Explorateur
+- Qui est l’ombre
+- Libérateur d’Elfe
+- Combattant Courageux
 
   
 
-Défaites : 
+**Défaites** : 
 
 Le joueur perd s’il se trompe de train lorsqu’il est dans la gare. Il y a 3 choix possibles : 1 seul train mène à Poudlard.                                                                     
 
   
 
-Les commandes disponibles : 
+#Les commandes disponibles :#
 
   
 
-    - help : afficher cette aide
+- help : afficher cette aide
+- quit : quitter le jeu
+- go <direction> : se déplacer dans une direction cardinale (N, E, S, O) ou monter (U) ou  descendre (D)
+- history : afficher l'historique des pièces visitées
+- back : revenir à la pièce précédente
+- inventory : afficher l'inventaire du joueur
+- look : regarder autour de soi dans la pièce actuelle
+- take : prendre un objet dans la pièce actuelle
+- drop : déposer un objet de l'inventaire du joueur dans la pièce actuelle
+- check : examiner un objet de l'inventaire du joueur
+- charger : charger une pièce dans le portoloin
+- use : utiliser un objet de l'inventaire du joueur
+- read : lire un objet de l'inventaire du joueur
+- talk : parler à un personnage dans la pièce actuelle
+- quests : afficher les quêtes en cours et leurs statuts
+- rewards : afficher les récompenses obtenues
+- quest <titre de la quête> : afficher les détails d'une quête spécifique
+- activate : activer une quête
+- activate\_all : activer toutes les quêtes
+- give < objet + to + personnage > : donner un objet à un personnage dans la pièce actuelle
+- spell : lancer un sort avec un objet de l'inventaire du joueur
+- add < objet + to + objet > : ajouter un ingrédient dans le chaudron                          
 
-    - quit : quitter le jeu
 
-    - go <direction> : se déplacer dans une direction cardinale (N, E, S, O) ou monter (U) ou  descendre (D)
-
-    - history : afficher l'historique des pièces visitées
-
-    - back : revenir à la pièce précédente
-
-    - inventory : afficher l'inventaire du joueur
-
-    - look : regarder autour de soi dans la pièce actuelle
-
-    - take : prendre un objet dans la pièce actuelle
-
-    - drop : déposer un objet de l'inventaire du joueur dans la pièce actuelle
-
-    - check : examiner un objet de l'inventaire du joueur
-
-    - charger : charger une pièce dans le portoloin
-
-    - use : utiliser un objet de l'inventaire du joueur
-
-    - read : lire un objet de l'inventaire du joueur
-
-    - talk : parler à un personnage dans la pièce actuelle
-
-    - quests : afficher les quêtes en cours et leurs statuts
-
-    - rewards : afficher les récompenses obtenues
-
-    - quest <titre de la quête> : afficher les détails d'une quête spécifique
-
-    - activate : activer une quête
-
-    - activate\_all : activer toutes les quêtes
-
-    - give < objet + to + personnage > : donner un objet à un personnage dans la pièce actuelle
-
-    - spell : lancer un sort avec un objet de l'inventaire du joueur
-
-    - add < objet + to + objet > : ajouter un ingrédient dans le chaudron                          Les quêtes : 
-
+#Les quêtes :# 
   
 
 **Nom de la quête** : train\_quest
