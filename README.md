@@ -165,8 +165,6 @@ Pour gagner le jeu, le joueur doit effectuer 1 quêtes obligatoirement, qui dema
 
 - Petit Voyageur
 - Grand Explorateur
-- Qui est l’ombre
-- Libérateur d’Elfe
 - Combattant Courageux
 
   

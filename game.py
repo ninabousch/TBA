@@ -401,7 +401,7 @@ class Game:
         saving_quest = Quest(
             title="Sauveur de Poudlard",
             description="Sauvez Poudlard de la menace qui plane sur elle en accomplissant toutes les autres quêtes.",
-            objectives=["Compléter Combattant Courageux", "Compléter Libérateur d'Elfe", "Compléter Qui est l'ombre", "Compléter Grand Explorateur", "Compléter Petit Voyageur"],
+            objectives=["Compléter Combattant Courageux","Compléter Grand Explorateur", "Compléter Petit Voyageur"],
             reward="Héros de Poudlard"
         )
 
