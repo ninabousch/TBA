@@ -251,126 +251,81 @@ Les commandes disponibles :
   
 
 **Nom de la quête** : train\_quest
-
-Titre de la quête : Petit Voyageur
-
-Description : Prenez le bon train pour aller à Poudlard
-
-Objectifs : Aller dans le bon train
-
-Récompense : Ticket de train
+*Titre de la quête : Petit Voyageur
+*Description : Prenez le bon train pour aller à Poudlard
+*Objectifs : Aller dans le bon train
+*Récompense : Ticket de train
 
   
-
 **Nom de la quête** : installation\_quest
+*Titre de la quête : Installation
+*Description : Installez-vous à Poudlard, allez déposer votre valise dans les dortoirs
+*Objectifs : take valise, Aller à l'entree, Aller aux dortoirs, drop valise
+*Récompense : Uniforme de Poudlard
 
-Titre de la quête : Installation
-
-Description : Installez-vous à Poudlard, allez déposer votre valise dans les dortoirs
-
-Objectifs : take valise, Aller à l'entree, Aller aux dortoirs, drop valise
-
-Récompense : Uniforme de Poudlard
-
-  
 
 **Nom de la quête** : exploration\_quest
+*Titre de la quête : Grand Explorateur
+*Description : Visiter toutes les lieux de la map
+*Objectifs : Visiter foret, Visiter dortoirs, Visiter classe, Visiter chemin, Visiter cabane, Visiter banquet, Visiter bibliotheque, Visiter escalier, Visiter couloir, Visiter entree, Visiter train, Visiter palier, Visiter cachots
+*Récompense : Titre de Grand Explorateur
 
-Titre de la quête : Grand Explorateur
-
-Description : 
-
-Objectifs : Visiter foret, Visiter dortoirs, Visiter classe, Visiter chemin, Visiter cabane, Visiter banquet, Visiter bibliotheque, Visiter escalier, Visiter couloir, Visiter entree, Visiter train, Visiter palier, Visiter cachots
-
-Récompense : Titre de Grand Explorateur
-
-  
 
 **Nom de la quête** : livre\_quest
-
-Titre de la quête : Qui est l'ombre
-
-Description : Découvrez quelle est la créature qui rôde dans les couloirs et menace Poudlard. Prenez le livre à son sujet dans la bibliothèque pour en savoir plus
-
-Objectifs : Aller à la bibliotheque, take detraqueurs, read detraqueurs
-
-Récompense : Grimoire magique
-
+*Titre de la quête : Qui est l'ombre
+*Description : Découvrez quelle est la créature qui rôde dans les couloirs et menace Poudlard. Prenez le livre à son sujet dans la bibliothèque pour en savoir plus
+*Objectifs : Aller à la bibliotheque, take detraqueurs, read detraqueurs
+*Récompense : Grimoire magique
   
 
 **Nom de la quête** : talking\_quest
+*Titre de la quête : Maître de la Conversation
+*Description : Parlez à ces 5 personnages différents dans le jeu (Dumbledore, Hagrid, Rogue, Hermione, Firenze)
+*Objectifs : talk à Dumbledore, talk à Hagrid, talk à Rogue, talk à Hermione, talk à Firenze
+*Récompense : Amulette de communication 
 
-Titre de la quête : Maître de la Conversation
-
-Description : Parlez à ces 5 personnages différents dans le jeu (Dumbledore, Hagrid, Rogue, Hermione, Firenze)
-
-Objectifs : talk à Dumbledore, talk à Hagrid, talk à Rogue, talk à Hermione, talk à Firenze
-
-Récompense : Amulette de communication 
 
 **Nom de la quête** : dobby\_quest
-
-Titre de la quête : Libérateur d'Elfe
-
-Description : Aidez Dobby à se libérer de l'esclavage en lui offrant un vêtement
-
-Objectifs : take chaussettes, give chaussettes to Dobby
-
-Récompense : Gratitude de Dobby
+*Titre de la quête : Libérateur d'Elfe
+*Description : Aidez Dobby à se libérer de l'esclavage en lui offrant un vêtement
+*Objectifs : take chaussettes, give chaussettes to Dobby
+*Récompense : Gratitude de Dobby
 
   
-
 **Nom de la quête** : potion\_quest
-
-Titre de la quête : Apprenti Potioniste
-
-Description : faire une potion de vérité pour faire parler Luna de son secret
-
-Objectifs : Add licorne to chaudron,Add phenix to chaudron,Add mandragore to chaudron
-
-Récompense : Potion de vérité
+*Titre de la quête : Apprenti Potioniste
+*Description : faire une potion de vérité pour faire parler Luna de son secret
+*Objectifs : Add licorne to chaudron,Add phenix to chaudron,Add mandragore to chaudron
+*Récompense : Potion de vérité
 
   
 
 **Nom de la quête** : fighting\_quest
+*Titre de la quête : Combattant Courageux
+*Description : Vaincre le détraqueur dans la forêt interdite grâce aux sort de protection
+*Objectifs : take baguette, aller à la classe, take sortileges, read sortileges, aller à la foret, spell *expecto\_patronum, use portoloin
+*Récompense : cape d'invisibilité
 
-Titre de la quête : Combattant Courageux
-
-Description : Vaincre le détraqueur dans la forêt interdite grâce aux sort de protection
-
-Objectifs : take baguette, aller à la classe, take sortileges, read sortileges, aller à la foret, spell expecto\_patronum, use portoloin
-
-Récompense : 
-
-  
 
 **Nom de la quête** : saving\_quest
+*Titre de la quête : Sauveur de Poudlard
+*Description : Sauver Poudlard de la menace qui plane sur elle en accomplissant toutes les autres quêtes
+*Objectifs : Compléter fighting\_quest, Completer dobby\_quest, Completer livre\_quest, Completer *exploration\_quest, Completer train\_quest
+*Récompense : Héros de Poudlard
 
-Titre de la quête : Sauveur de Poudlard
 
-Description : Sauver Poudlard de la menace qui plane sur elle en accomplissant toutes les autres quêtes
-
-Objectifs : Compléter fighting\_quest, Completer dobby\_quest, Completer livre\_quest, Completer exploration\_quest, Completer train\_quest
-
-Récompense : Héros de Poudlard
 
   
 
-  
+##**Comment y jouer :**## 
 
-  
-
-Comment y jouer : 
-
-  
 
 C’est un jeu textuel, ainsi il faut écrire des commandes pour évoluer dans le jeu.
-
 Il est vivement conseillé de lire ce que la commande “help” affiche. Elle affiche l’ensemble des commandes du jeu et leur utilité.
 
 
 
-**Le guide développeur :** 
+####**Le guide développeur :**#### 
 
 ## Diagramme 
 
@@ -528,18 +483,13 @@ classDiagram
     }
 ```
 
-**Les perspectives de développement :** 
+####**Les perspectives de développement :**#### 
 
   
 
-Une quête où il faut récupérer toute la nourriture possible dans le jeu et aller l’apporter à Hagrid.
-
-Une quête Choixpeau Magique : On va voir le Choixpeau Magique et il pose des questions sur notre personnalité. Selon les réponses du joueur, le Choixpeau Magique l'attribue dans une des quatre maisons de Poudlard.
-
-Une quête avec un vrai combat avec le Détraqueur. Le joueur doit lancer plusieurs sorts et choisir un souvenir dans sa mémoire qui rendra son sort plus ou moins puissant. Le joueur peut perdre le jeu lors de cette quête.
-
-Si le joueur prend la branche du saule cogneur qui se trouve dans la forêt interdite, le joueur a perdu.
-
-Mettre des interfaces graphiques.
-
-garder que les 5 dernières pièces visitées
+*Une quête où il faut récupérer toute la nourriture possible dans le jeu et aller l’apporter à Hagrid.
+*Une quête Choixpeau Magique : On va voir le Choixpeau Magique et il pose des questions sur notre personnalité. Selon les réponses du joueur, le Choixpeau Magique l'attribue dans une des quatre maisons de Poudlard.
+*Une quête avec un vrai combat avec le Détraqueur. Le joueur doit lancer plusieurs sorts et choisir un souvenir dans sa mémoire qui rendra son sort plus ou moins puissant. Le joueur peut perdre le jeu lors de cette quête.
+*Si le joueur prend la branche du saule cogneur qui se trouve dans la forêt interdite, le joueur a perdu.
+*Mettre des interfaces graphiques.
+*garder que les 5 dernières pièces visitées dans l'historique affiché automatiquement a chaque commande go 
