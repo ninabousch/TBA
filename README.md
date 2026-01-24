@@ -1,94 +1,78 @@
-**Le guide utilisateur :** 
+####**Le guide utilisateur :** 
 
   
 
   
 
-**Comment installer votre jeu :** 
+##**Comment installer votre jeu :** 
 
 Il faut écrire dans le terminal : 
 
 § git pull (pour avoir la dernière version du jeu),
-
 § python game.py ou python3 game.py sur macOS (pour lancer le programme et donc pour lancer le jeu),
-
 entrer son nom de joueur,
-
 lire les instructions.
 
   
 
   
 
-**Sa description :** 
+##**Sa description :** 
 
   
 
-L’univers, le scénario : 
+#L’univers, le scénario : 
 
   
 
 Vous incarnez un sorcier qui se rend à sa nouvelle année de Poudlard. 
-
 Le jeu débute donc à la gare, avec comme première mission de choisir le bon train et ne pas oublier ses affaires.
-
 En arrivant à Poudlard, vous comprenez petit à petit que quelque chose se passe… Une créature rôde dans Poudlard ! 
-
 C’est à vous de trouver quelle est cette créature, comment elle est arrivée là, comment la vaincre et sauver Poudlard ! 
-
 Pour cela, explorez votre environnement dans les moindre détails et résolvez les quêtes.
 
   
 
-Salles avec leurs objets et PNJ : 
+#Salles avec leurs objets et PNJ : 
 
 Certains PNJ bougent, d’autres non. Ceux qui bougent ont l’indication “bouge” et sont placés dans la salle où ils se trouvent lors de l’initialisation de jeu.
 
   
 
-La gare (gare)
+**La gare (gare)**
 
-La valise du joueur (valise)
-
-La baguette magique du joueur (baguette)
-
-  
-
-Le train direction Poudlard (train)
-
-Des bonbons (bonbons)
-
-L’élève Ron (Ron) bouge
-
-L’élève Harry (Harry) bouge
-
-L’élève Cédric (Cedric)
+- La valise du joueur (valise)
+- La baguette magique du joueur (baguette)
 
   
 
-Le train direction Durmstrang (wrongtrain)
+**Le train direction Poudlard (train)**
+
+- Des bonbons (bonbons)
+- L’élève Ron (Ron) bouge
+- L’élève Harry (Harry) bouge
+- L’élève Cédric (Cedric)
 
   
 
-Le train direction ESIEE Paris (noisytrain) L’entrée de Poudlard (entree)
+**Le train direction Durmstrang (wrongtrain)**
 
-Une chouette (chouette)
+**Le train direction ESIEE Paris (noisytrain)**
+
+**L’entrée de Poudlard (entree)**
+
+- Une chouette (chouette)
 
   
 
-La bibliothèque (bibliotheque)
+**La bibliothèque (bibliotheque)**
 
-Un livre sur les loups (loups)
-
-Un livre sur les trolls (trolls)
-
-Un livre sur les acromentules (acromentules)
-
-Un livre sur les détraqueurs (detraqueurs)
-
-Un livre sur les fantômes (fantomes)
-
-L’élève Hermione (Hermione) bouge
+- Un livre sur les loups (loups)
+- Un livre sur les trolls (trolls)
+- Un livre sur les acromentules (acromentules)
+- Un livre sur les détraqueurs (detraqueurs)
+- Un livre sur les fantômes (fantomes)
+- L’élève Hermione (Hermione) bouge
 
   
 
