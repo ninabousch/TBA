@@ -275,7 +275,7 @@ Le joueur perd s’il se trompe de train lorsqu’il est dans la gare. Il y a 3 
 
   
 
-##**Comment y jouer :**## 
+## **Comment y jouer :**
 
 
 C’est un jeu textuel, ainsi il faut écrire des commandes pour évoluer dans le jeu.
@@ -283,7 +283,7 @@ Il est vivement conseillé de lire ce que la commande “help” affiche. Elle a
 
 
 
-####**Le guide développeur :**#### 
+#### **Le guide développeur :**
 
 ## Diagramme 
 
@@ -441,7 +441,7 @@ classDiagram
     }
 ```
 
-####**Les perspectives de développement :**#### 
+####  **Les perspectives de développement :**
 
   
 
