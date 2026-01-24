@@ -35,16 +35,19 @@ class Character :
             self.current_room.characters[self.name] = self
 
 
+
     def __str__(self) :
         """ Return the string representation of the character. """
         return f"{self.name} : {self.description}"
     
+
 
     def get_msg(self):
         """ Return the messages of the character. """
         if not self.msgs:  # if the list is empty
             self.msgs = self.msgs_init.copy()  # Reset to initial messages
         return self.msgs.pop(0)  # Return and remove the first message
+
 
 
     def move(self):
@@ -65,6 +68,7 @@ class Character :
             return True
         
         return False
+      
         
 
     def movable_status(self):
